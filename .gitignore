@@ -1,3 +1,5 @@
 */makefile
+*/*.o
+*/sudoku
 
 */test

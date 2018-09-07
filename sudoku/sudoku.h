@@ -10,11 +10,13 @@ typedef struct
 
 typedef struct
 {
+	int ntry;   // hight of try
 	int unset;  // number of unset
 	lattice lat[81];
 } matrix;
 
 int nsol;  // number of solution
+int ntry;  // number of try
 
 // functions for io
 extern void readtxt(char *, matrix *);

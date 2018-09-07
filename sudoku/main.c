@@ -14,6 +14,8 @@ int main(int argc, char **argv)
     printf("input: %s\n", filename);
 
     matrix mat;
+    mat.ntry=0;
+
     readtxt(filename, &mat);
 
     printf("unset lattices: %i\n", mat.unset);
@@ -37,6 +39,7 @@ int main(int argc, char **argv)
     // }
 
     nsol=0;
+    ntry=0;
 
     mat_fill_notry(&mat);
 
@@ -45,6 +48,8 @@ int main(int argc, char **argv)
     print_mat(&mat);
 
     if(mat.unset) mat_fill_try(&mat);
+
+    printf("total try: %i\n", ntry);
 
     if(nsol==0) printf("no solution found\n");
     

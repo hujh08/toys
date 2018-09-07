@@ -24,6 +24,8 @@ int mat_fill_notry(matrix *mat) {
     }
 
     printf("solution %i:\n", ++nsol);
+    printf("total try: %i\n", ntry);
+    printf("level of try: %i\n", mat->ntry);
     print_mat(mat);
 
     return 1;
@@ -41,7 +43,10 @@ void mat_fill_try(matrix *mat) {
 
     for(int i=0; i<9; i++) {
         if(lat[n].cand[i]) {
+            ntry++;
+
             matrix mat0=*mat;
+            mat0.ntry++;
 
             // printf("try %i for lattice %i\n", i+1, n+1);
             mat_update(&mat0, n, i+1);
