@@ -1,0 +1,1 @@
+Simple solver for Sudoku
