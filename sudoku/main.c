@@ -29,6 +29,20 @@ int main(int argc, char **argv)
     mat_analysis(&mat);
 
     print_lat(mat.lat+n);
+    printf("\n");
+
+    n=2;
+    printf("row %i\n", n+1);
+    print_sub(mat.rows+n);
+    printf("\n");
+
+    // n=0;
+    // printf("col %i\n", n+1);
+    // print_sub(mat.cols+n);
+
+    // n=0;
+    // printf("block %i\n", n+1);
+    // print_sub(mat.blks+n);
 
     // for(int i=0; i<81; i++) {
     //     if(!lat_isset(mat.lat+i)) {
@@ -41,11 +55,18 @@ int main(int argc, char **argv)
     nsol=0;
     ntry=0;
 
-    mat_fill_notry(&mat);
+    int found=mat_fill_notry(&mat);
+
+    if(found==SCAN_ERROR) {
+        printf("error for matrix\n");
+        return -1;
+    }
 
     printf("matrix after fill without try\n");
     printf("unset lattices: %i\n", mat.unset);
     print_mat(&mat);
+
+    print_sub(mat.rows+n);
 
     if(mat.unset) mat_fill_try(&mat);
 
@@ -54,27 +75,27 @@ int main(int argc, char **argv)
     if(nsol==0) printf("no solution found\n");
 
 
-    printf("\n");
-    printf("right shift: %i\n", 1<<0);
-    printf("right shift: %i\n", 1<<2);
+    // printf("\n");
+    // printf("right shift: %i\n", 1<<0);
+    // printf("right shift: %i\n", 1<<2);
 
-    bitarr bta;
-    printf("max length: %li\n", MAXLEN);
-    printf("clear bit array\n");
-    bit_clear(&bta);
-    bit_print(&bta);
+    // bitarr bta;
+    // printf("max length: %li\n", MAXLEN);
+    // printf("clear bit array\n");
+    // bit_clear(&bta);
+    // bit_print(&bta);
 
-    printf("fill to length 4\n");
-    bit_fill(&bta, 4);
-    bit_print(&bta);
+    // printf("fill to length 4\n");
+    // bit_fill(&bta, 4);
+    // bit_print(&bta);
 
-    printf("unset 2\n");
-    bit_unset(&bta, 2);
-    bit_print(&bta);
+    // printf("unset 2\n");
+    // bit_unset(&bta, 2);
+    // bit_print(&bta);
 
-    printf("set 15\n");
-    bit_set(&bta, 15);
-    bit_print(&bta);
+    // printf("set 15\n");
+    // bit_set(&bta, 15);
+    // bit_print(&bta);
     
     return 0;
 }

@@ -19,6 +19,7 @@ void print_lat(lattice *lat) {
 		printf("\n");
 	}
 }
+
 void print_mat(matrix *mat) {
 	lattice *lat=mat->lat;
 	int n=0;
@@ -41,12 +42,12 @@ void lat_unset(lattice *lat) {
 	bit_fill(&(lat->cand), 9);
 }
 
-// determine whether lattice is set down
+// whether lattice is set down
 int lat_isset(lattice *lat) {
 	return lat->set;
 }
 
-// determine whether number is in candidate of a lattice
+// whether number is in candidate of a lattice
 int lat_iscand(lattice *lat, int d) {
 	return bit_has(&(lat->cand), d-1);
 }

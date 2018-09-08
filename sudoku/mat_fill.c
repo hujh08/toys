@@ -6,23 +6,53 @@
 
 // initial analysis must be done before
 int mat_fill_notry(matrix *mat) {
-    int toset, d;
-    lattice *lat=mat->lat;
+    int n, d, found;
+
     while(mat->unset) {
-        for(toset=0; toset<81; toset++) {
-            if(lat_isset(lat+toset)) continue;
-            int num=bit_num(&(lat[toset].cand));
-            // if(toset==32) printf("num: %i\n", num);
-            if(num==0) return -1;
-            if(num==1) break;
+        found=scan_lats(mat, &n, &d);
+        if(found==SCAN_ERROR) return found;
+        if(found==SCAN_SUCC) {
+            print_mat(mat);
+            printf("lats scan found: lat %i, num %i\n", n+1, d);
+            printf("\n");
+            mat_update(mat, n, d);
+            continue;
         }
 
-        if(toset==81) return 0;
+        // printf("begin to scan rows\n");
+        found=scan_rows(mat, &n, &d);
+        if(found==SCAN_ERROR) return found;
+        if(found==SCAN_SUCC) {
+            print_mat(mat);
+            printf("rows scan found: lat %i, num %i\n", n+1, d);
+            printf("\n");
+            mat_update(mat, n, d);
+            continue;
+        }
 
-        d=lat_1stcand(lat+toset);
+        // printf("begin to scan cols\n");
+        found=scan_cols(mat, &n, &d);
+        if(found==SCAN_ERROR) return found;
+        if(found==SCAN_SUCC) {
+            print_mat(mat);
+            printf("cols scan found: lat %i, num %i\n", n+1, d);
+            printf("\n");
+            mat_update(mat, n, d);
+            continue;
+        }
 
-        // printf("update lattice %i with %i\n", toset+1, d);
-        mat_update(mat, toset, d);
+        // printf("begin to scan blks\n");
+        found=scan_blks(mat, &n, &d);
+        if(found==SCAN_ERROR) return found;
+        if(found==SCAN_SUCC) {
+            print_mat(mat);
+            printf("blks scan found: lat %i, num %i\n", n+1, d);
+            printf("\n");
+            mat_update(mat, n, d);
+            continue;
+        }
+
+        if(found==SCAN_NONE) return found;
     }
 
     printf("solution %i:\n", ++nsol);
@@ -30,7 +60,7 @@ int mat_fill_notry(matrix *mat) {
     printf("level of try: %i\n", mat->ntry);
     print_mat(mat);
 
-    return 1;
+    return SCAN_SUCC;
 }
 
 // try candidates for unset lattice
