@@ -19,6 +19,7 @@ int mat_analysis(matrix *mat) {
 			if(lat_isset(lat+n)) {
                 lat_update(lat, n);
                 // print_lat(lat+1);
+                // printf("num: %i\n", num);
 			}
 		}
 	}

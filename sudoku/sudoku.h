@@ -1,11 +1,12 @@
 // structures for sudoku
 
+#include "bitarr.h"
+
 typedef struct
 {
     int set,
-        number,
-        np,        // number of candidates
-        cand[9];  // candidate number if unset
+        number;
+    bitarr cand;  // use bit array to store number candidates
 } lattice;
 
 typedef struct

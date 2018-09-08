@@ -22,7 +22,7 @@ int main(int argc, char **argv)
     printf("initial state:\n");
     print_mat(&mat);
 
-    int n=1;
+    int n=32;
     printf("state for lat %i\n", n+1);
     print_lat(mat.lat+n);
 
@@ -52,6 +52,29 @@ int main(int argc, char **argv)
     printf("total try: %i\n", ntry);
 
     if(nsol==0) printf("no solution found\n");
+
+
+    printf("\n");
+    printf("right shift: %i\n", 1<<0);
+    printf("right shift: %i\n", 1<<2);
+
+    bitarr bta;
+    printf("max length: %li\n", MAXLEN);
+    printf("clear bit array\n");
+    bit_clear(&bta);
+    bit_print(&bta);
+
+    printf("fill to length 4\n");
+    bit_fill(&bta, 4);
+    bit_print(&bta);
+
+    printf("unset 2\n");
+    bit_unset(&bta, 2);
+    bit_print(&bta);
+
+    printf("set 15\n");
+    bit_set(&bta, 15);
+    bit_print(&bta);
     
     return 0;
 }

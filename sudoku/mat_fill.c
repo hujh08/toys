@@ -11,8 +11,10 @@ int mat_fill_notry(matrix *mat) {
     while(mat->unset) {
         for(toset=0; toset<81; toset++) {
             if(lat_isset(lat+toset)) continue;
-            if(lat[toset].np==0) return -1;
-            if(lat[toset].np==1) break;
+            int num=bit_num(&(lat[toset].cand));
+            // if(toset==32) printf("num: %i\n", num);
+            if(num==0) return -1;
+            if(num==1) break;
         }
 
         if(toset==81) return 0;
@@ -41,15 +43,16 @@ void mat_fill_try(matrix *mat) {
         if(!lat_isset(lat+n)) break;
     }
 
-    for(int i=0; i<9; i++) {
-        if(lat[n].cand[i]) {
+    for(int i=1; i<=9; i++) {
+        // if(lat[n].cand[i]) {
+        if(lat_iscand(lat+n, i)) {
             ntry++;
 
             matrix mat0=*mat;
             mat0.ntry++;
 
             // printf("try %i for lattice %i\n", i+1, n+1);
-            mat_update(&mat0, n, i+1);
+            mat_update(&mat0, n, i);
 
             conflict=mat_fill_notry(&mat0);
 
