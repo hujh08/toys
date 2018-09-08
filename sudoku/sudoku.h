@@ -28,6 +28,9 @@ typedef struct
 {
 	int ntry;   // hight of try
 	int unset;  // number of unset
+
+	int verbose;  // whether print the step
+
 	lattice lat[81];
 
 	submat rows[9], cols[9], blks[9];

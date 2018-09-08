@@ -15,6 +15,7 @@ int main(int argc, char **argv)
 
     matrix mat;
     mat.ntry=0;
+    mat.verbose=1;
 
     readtxt(filename, &mat);
 
@@ -68,6 +69,7 @@ int main(int argc, char **argv)
 
     print_sub(mat.rows+n);
 
+    mat.verbose=0;
     if(mat.unset) mat_fill_try(&mat);
 
     printf("total try: %i\n", ntry);

@@ -8,13 +8,17 @@
 int mat_fill_notry(matrix *mat) {
     int n, d, found;
 
+    int verbose=mat->verbose;
+
     while(mat->unset) {
         found=scan_lats(mat, &n, &d);
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) {
-            print_mat(mat);
-            printf("lats scan found: lat %i, num %i\n", n+1, d);
-            printf("\n");
+            if(verbose) {
+                print_mat(mat);
+                printf("lats scan found: lat %i, num %i\n", n+1, d);
+                printf("\n");
+            }
             mat_update(mat, n, d);
             continue;
         }
@@ -23,9 +27,11 @@ int mat_fill_notry(matrix *mat) {
         found=scan_rows(mat, &n, &d);
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) {
-            print_mat(mat);
-            printf("rows scan found: lat %i, num %i\n", n+1, d);
-            printf("\n");
+            if(verbose) {
+                print_mat(mat);
+                printf("rows scan found: lat %i, num %i\n", n+1, d);
+                printf("\n");
+            }
             mat_update(mat, n, d);
             continue;
         }
@@ -34,9 +40,11 @@ int mat_fill_notry(matrix *mat) {
         found=scan_cols(mat, &n, &d);
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) {
-            print_mat(mat);
-            printf("cols scan found: lat %i, num %i\n", n+1, d);
-            printf("\n");
+            if(verbose) {
+                print_mat(mat);
+                printf("cols scan found: lat %i, num %i\n", n+1, d);
+                printf("\n");
+            }
             mat_update(mat, n, d);
             continue;
         }
@@ -45,9 +53,11 @@ int mat_fill_notry(matrix *mat) {
         found=scan_blks(mat, &n, &d);
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) {
-            print_mat(mat);
-            printf("blks scan found: lat %i, num %i\n", n+1, d);
-            printf("\n");
+            if(verbose) {
+                print_mat(mat);
+                printf("blks scan found: lat %i, num %i\n", n+1, d);
+                printf("\n");
+            }
             mat_update(mat, n, d);
             continue;
         }
