@@ -44,7 +44,6 @@ int scan_sub(number_t *nums, int *insub, int *digit) {
     return SCAN_NONE;
 }
 
-typedef int (*fun_id)(int , int );
 // general function for subs
 int scan_subs(submat *subs, int *n, int *d, fun_id f) {
     int found;
@@ -64,19 +63,6 @@ int scan_subs(submat *subs, int *n, int *d, fun_id f) {
     }
 
     return SCAN_NONE;
-}
-
-// functions to calculate id given id of sub and in sub
-int fid_row(int ofsub, int insub) {
-    return insub+9*ofsub;
-}
-
-int fid_col(int ofsub, int insub) {
-    return ofsub+9*insub;
-}
-
-int fid_blk(int ofsub, int insub) {
-    return (3*(ofsub%3)+(insub%3))+9*(3*(ofsub/3)+(insub/3));
 }
 
 // scan rows/cols/blocks

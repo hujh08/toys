@@ -59,6 +59,12 @@ int ntry;  // number of try
 #define SCAN_NONE  0
 #define SCAN_SUCC  1
 
+// function to calculate id
+typedef int (*fun_id)(int , int );
+extern int fid_row(int , int );
+extern int fid_col(int , int );
+extern int fid_blk(int , int );
+
 // functions for io
 extern void readtxt(char *, matrix *);
 extern void print_mat(matrix *);
