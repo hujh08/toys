@@ -6,3 +6,6 @@ Solve a mathmatical question.
 
 # prime
 Sieve of Eratosthenes ot find out primes
+
+# sudoku
+Solver for sudoku
