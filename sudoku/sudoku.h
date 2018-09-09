@@ -71,6 +71,9 @@ extern void print_mat(matrix *);
 extern void print_lat(lattice *);
 extern void print_sub(submat *);
 
+// function for arguments
+extern void parse_args(int , char **, matrix *);
+
 // functions for single lattice
 extern void lat_init_unset(lattice *);
 extern void lat_set(lattice *, int );

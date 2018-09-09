@@ -15,7 +15,8 @@ int main(int argc, char **argv)
 
     matrix mat;
     mat.ntry=0;
-    mat.verbose=1;
+
+    parse_args(argc, argv, &mat);
 
     readtxt(filename, &mat);
 
@@ -23,19 +24,19 @@ int main(int argc, char **argv)
     printf("initial state:\n");
     print_mat(&mat);
 
-    int n=32;
-    printf("state for lat %i\n", n+1);
-    print_lat(mat.lat+n);
+    // int n=32;
+    // printf("state for lat %i\n", n+1);
+    // print_lat(mat.lat+n);
 
     mat_analysis(&mat);
 
-    print_lat(mat.lat+n);
-    printf("\n");
+    // print_lat(mat.lat+n);
+    // printf("\n");
 
-    n=2;
-    printf("row %i\n", n+1);
-    print_sub(mat.rows+n);
-    printf("\n");
+    // n=2;
+    // printf("row %i\n", n+1);
+    // print_sub(mat.rows+n);
+    // printf("\n");
 
     // n=0;
     // printf("col %i\n", n+1);
@@ -58,17 +59,23 @@ int main(int argc, char **argv)
 
     int found=mat_fill_notry(&mat);
 
+    printf("after fill without try:\n");
     if(found==SCAN_ERROR) {
-        printf("error for matrix\n");
+        printf("    error for matrix\n");
         return -1;
     }
 
-    printf("matrix after fill without try\n");
-    printf("unset lattices: %i\n", mat.unset);
-    print_mat(&mat);
+    if(found==SCAN_SUCC) {
+        printf("    finished without try\n");
+    } else {
+        printf("    matrix after fill without try\n");
+        printf("    unset lattices: %i\n", mat.unset);
+        print_mat(&mat);
+    }
+    printf("\n");
 
-    n=0;
-    print_sub(mat.blks+n);
+    // n=0;
+    // print_sub(mat.blks+n);
 
     mat.verbose=0;
     if(mat.unset) mat_fill_try(&mat);
@@ -76,6 +83,7 @@ int main(int argc, char **argv)
     printf("total try: %i\n", ntry);
 
     if(nsol==0) printf("no solution found\n");
+    else printf("%i solutions found\n", nsol);
 
 
     // printf("\n");

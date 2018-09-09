@@ -230,14 +230,16 @@ int subs_group(matrix *mat, submat *subs, fun_nrcbs f) {
         if(found==SCAN_ERROR) return found;
 
         if(found==SCAN_SUCC) {
-            if(verb) printf("numbers group for sub %i\n", ofi);
-            printf("arr: ");
-            bit_print_bin(arr, 9);
-            printf("\n");
+            if(verb) {
+                printf("numbers group for sub %i\n", ofi);
+                printf("arr: ");
+                bit_print_bin(arr, 9);
+                printf("\n");
 
-            printf("pos: ");
-            bit_print_bin(pos, 9);
-            printf("\n");
+                printf("pos: ");
+                bit_print_bin(pos, 9);
+                printf("\n");
+            }
 
             for(int i=0; i<9; i++) {
                 if(!(pos&(1<<i))) continue;
