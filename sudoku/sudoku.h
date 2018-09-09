@@ -2,26 +2,37 @@
 
 #include "bitarr.h"
 
-// structure for lattice
-typedef struct
-{
-    int set,
-        number;
-    bitarr cand;  // use bit array to store number candidates
-} lattice;
-
-// store for candidate lattices for a number
+// structure for candidate, for lattice or number in row/col/block
 typedef struct
 {
 	int set;
-	bitarr cand;
-} number_t;
+	bitarr arr;
+} cand_t;
+
+// structure for lattice
+typedef struct
+{
+    // int set,
+    //     number;
+    // bitarr cand;  // use bit array to store number candidates
+
+    int number;
+    cand_t cnds;
+} lattice;
+
+// store for candidate lattices for a number
+// typedef struct
+// {
+// 	int set;
+// 	bitarr cand;
+// } number_t;
+typedef cand_t number_t;
 
 // structure for sub-matrix, i.e. row, column, block
 typedef struct
 {
 	int unset;    // number of unset
-	number_t nums[9];
+	cand_t nums[9];
 } submat;
 
 typedef struct
@@ -55,15 +66,21 @@ extern void print_lat(lattice *);
 extern void print_sub(submat *);
 
 // functions for single lattice
-extern void lat_unset(lattice *);
+extern void lat_init_unset(lattice *);
+extern void lat_set(lattice *, int );
 extern int lat_isset(lattice *);
 extern int lat_iscand(lattice *, int );
 extern int lat_1stcand(lattice *);
+extern int lat_cand_num(lattice *);
 extern void lat_exclude(lattice *, int );
+
+// functions for candidate structure
+extern int cand_isset(cand_t *);
+extern int cand_num(cand_t *);
+extern barr_t cand_bins(cand_t *);
 
 // functions for number structure
 extern void num_init(number_t *);
-extern int num_isset(number_t *);
 extern int num_1stcand(number_t *);
 
 // functions for sub-matrix
@@ -85,3 +102,6 @@ extern int scan_lats(matrix *, int *, int *);
 extern int scan_rows(matrix *, int *, int *);
 extern int scan_cols(matrix *, int *, int *);
 extern int scan_blks(matrix *, int *, int *);
+
+// functions to matrix groups
+extern int mat_group(matrix *);

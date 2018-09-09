@@ -1,13 +1,13 @@
 // bit array
 
-typedef int tbarr;
+typedef int barr_t;
 
-#define MAXLEN (8*sizeof(tbarr))
+#define MAXLEN (8*sizeof(barr_t))
 
 typedef struct
 {
 	int num;      // number of elements in array
-	tbarr bitarr;
+	barr_t bitarr;
 } bitarr;
 
 
@@ -20,6 +20,7 @@ extern void bit_unset(bitarr *, int );
 
 // io functions
 extern void bit_print(bitarr *);
+extern void bit_print_bin(barr_t , int );
 
 // functions to determine something
 extern int bit_has(bitarr *, int );
@@ -27,6 +28,8 @@ extern int bit_isempty(bitarr *);
 
 // info of array
 extern int bit_num(bitarr *);
+extern int bit_num_bin(barr_t , int );
+extern barr_t bit_bins(bitarr *);
 
 // return an element
 extern int bit_1st(bitarr *);

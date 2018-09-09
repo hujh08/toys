@@ -24,10 +24,11 @@ void readtxt(char *filename, matrix *mat) {
 
         for(int i=0; i<9; i++) {
             if(line[i]!='0') {
-            	lat[n].set=1;
-            	lat[n].number=line[i]-'0';
+                lat_set(lat+n, line[i]-'0');
+            	// lat[n].set=1;
+            	// lat[n].number=line[i]-'0';
                 mat->unset--;
-            } else lat_unset(lat+n);
+            } else lat_init_unset(lat+n);
             n++;
         }
     }

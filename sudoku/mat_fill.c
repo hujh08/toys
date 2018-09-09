@@ -62,6 +62,9 @@ int mat_fill_notry(matrix *mat) {
             continue;
         }
 
+        found=mat_group(mat);
+        if(found==SCAN_ERROR) return found;
+
         if(found==SCAN_NONE) return found;
     }
 

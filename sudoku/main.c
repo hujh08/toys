@@ -67,7 +67,8 @@ int main(int argc, char **argv)
     printf("unset lattices: %i\n", mat.unset);
     print_mat(&mat);
 
-    print_sub(mat.rows+n);
+    n=0;
+    print_sub(mat.blks+n);
 
     mat.verbose=0;
     if(mat.unset) mat_fill_try(&mat);

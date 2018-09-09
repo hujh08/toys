@@ -66,8 +66,7 @@ void mat_update(matrix *mat, int n, int d) {
     // printf("update: lat %i, num %i\n", n+1, d);
     // print_mat(mat);
 
-    lat[n].set=1;
-    lat[n].number=d;
+    lat_set(lat+n, d);
 
     mat->unset--;
 

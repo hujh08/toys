@@ -10,7 +10,7 @@ int scan_lats(matrix *mat, int *n, int *d) {
 
     for(int i=0; i<81; i++) {
         if(lat_isset(lat+i)) continue;
-        int nc=bit_num(&(lat[i].cand));  // number of candidates
+        int nc=lat_cand_num(lat+i);  // number of candidates
         // if(toset==32) printf("num: %i\n", nc);
         if(nc==0) return SCAN_ERROR;
         if(nc==1) {
@@ -30,9 +30,9 @@ int scan_rows(matrix *mat, int *n, int *d) {
 
         number_t *nums=rows[r].nums;
         for(int i=0; i<9; i++) {
-            if(num_isset(nums+i)) continue;
+            if(cand_isset(nums+i)) continue;
 
-            int nc=bit_num(&(nums[i].cand));
+            int nc=cand_num(nums+i);
             if(nc==0) {
                 // printf("%i row error\n", r+1);
                 // print_sub(rows+r);
@@ -61,11 +61,11 @@ int scan_cols(matrix *mat, int *n, int *d) {
         number_t *nums=cols[c].nums;
         for(int i=0; i<9; i++) {
             // if(c==0 && i==0)
-                // printf("0 cols 0 num: %i\n", num_isset(nums+i));
+                // printf("0 cols 0 num: %i\n", cand_isset(nums+i));
 
-            if(num_isset(nums+i)) continue;
+            if(cand_isset(nums+i)) continue;
 
-            int nc=bit_num(&(nums[i].cand));
+            int nc=cand_num(nums+i);
             if(nc==0) return SCAN_ERROR;
             if(nc==1) {
                 int r=num_1stcand(nums+i);
@@ -86,9 +86,9 @@ int scan_blks(matrix *mat, int *n, int *d) {
 
         number_t *nums=blks[b].nums;
         for(int i=0; i<9; i++) {
-            if(num_isset(nums+i)) continue;
+            if(cand_isset(nums+i)) continue;
 
-            int nc=bit_num(&(nums[i].cand));
+            int nc=cand_num(nums+i);
             if(nc==0) return SCAN_ERROR;
             if(nc==1) {
                 int s=num_1stcand(nums+i);

@@ -45,6 +45,14 @@ void bit_print(bitarr *bta) {
     printf("\n");
 }
 
+// just print binary bit one by one
+void bit_print_bin(barr_t b, int len) {
+    for(int i=0; i<len; i++) {
+        if(b&(1<<i)) printf("1");
+        else printf("0");
+    }
+}
+
 // if contain a element
 int bit_has(bitarr *bta, int n) {
     return (bta->bitarr)&(1<<n);
@@ -57,6 +65,20 @@ int bit_isempty(bitarr *bta) {
 // number of elements in array
 int bit_num(bitarr *bta) {
     return bta->num;
+}
+
+// number of elements from barr_t
+int bit_num_bin(barr_t b, int len) {
+    int num=0;
+    for(int i=0; i<len; i++) {
+        if(b&(1<<i)) num++;
+    }
+    return num;
+}
+
+// bin bits
+barr_t bit_bins(bitarr *bta) {
+    return bta->bitarr;
 }
 
 // first element

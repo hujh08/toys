@@ -20,18 +20,18 @@ void sub_set(submat *sub, int d) {
 
 // add a candidate lattice for a number
 void sub_add(submat *sub, int li, int d) {
-    bit_set(&(sub->nums[d-1].cand), li);
+    bit_set(&(sub->nums[d-1].arr), li);
 }
 
 // exclude a candidate number in a lattice
 void sub_del_latnum(submat *sub, int li, int d) {
-    bit_unset(&(sub->nums[d-1].cand), li);
+    bit_unset(&(sub->nums[d-1].arr), li);
 }
 
 // exclude a lattice for all numbers
 void sub_del_lat(submat *sub, int li) {
     for(int d=0; d<9; d++)
-        bit_unset(&(sub->nums[d].cand), li);
+        bit_unset(&(sub->nums[d].arr), li);
 }
 
 // whether lattice is set down
@@ -50,15 +50,15 @@ void print_sub(submat *sub) {
 
     printf("%i set numbers:", 9-sub->unset);
     for(int i=0; i<9; i++) {
-        if(num_isset(nums+i)) printf(" %i", i+1);
+        if(cand_isset(nums+i)) printf(" %i", i+1);
     }
     printf("\n");
     for(int i=0; i<9; i++) {
-        if(num_isset(nums+i)) continue;
-        printf("number %i: %i lat", i+1, bit_num(&(nums[i].cand)));
-        if(!num_isset(nums+i)) {
+        if(cand_isset(nums+i)) continue;
+        printf("number %i: %i lat", i+1, cand_num(nums+i));
+        if(!cand_isset(nums+i)) {
             for(int n=0; n<9; n++) {
-                if(bit_has(&(nums[i].cand), n))
+                if(bit_has(&(nums[i].arr), n))
                     printf(" %i", n+1);
             }
             printf("\n");
@@ -69,13 +69,22 @@ void print_sub(submat *sub) {
 // function about number
 void num_init(number_t *num) {
     num->set=0;
-    bit_clear(&(num->cand));
-}
-
-int num_isset(number_t *num) {
-    return num->set;
+    bit_clear(&(num->arr));
 }
 
 int num_1stcand(number_t *num) {
-    return bit_1st(&(num->cand));
+    return bit_1st(&(num->arr));
+}
+
+// functions for all kinds of cand structure
+int cand_isset(cand_t *cnd) {
+    return cnd->set;
+}
+
+int cand_num(cand_t *cnd) {
+    return bit_num(&(cnd->arr));
+}
+
+barr_t cand_bins(cand_t *cnd) {
+    return bit_bins(&(cnd->arr));
 }

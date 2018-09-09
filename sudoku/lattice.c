@@ -11,7 +11,7 @@ void print_lat(lattice *lat) {
 		printf("number: %i\n", lat->number);
 	} else {
 		printf("unset\n");
-		printf("number of candidate: %i\n", bit_num(&(lat->cand)));
+		printf("number of possible: %i\n", lat_cand_num(lat));
 		printf("candidate:");
 		for(int i=1; i<=9; i++) {
 			if(lat_iscand(lat, i)) printf(" %i", i);
@@ -28,7 +28,7 @@ void print_mat(matrix *mat) {
 		printf("        ");
 		for(int i=0; i<9; i++, n++) {
 			if(i==3 || i==6) printf("  ");
-			if(lat[n].set) printf("%i ", lat[n].number);
+			if(lat_isset(lat+n)) printf("%i ", lat[n].number);
 			else printf("x ");
 		}
 		printf("\n");
@@ -37,28 +37,39 @@ void print_mat(matrix *mat) {
 }
 
 // initial an unset lattice
-void lat_unset(lattice *lat) {
-	lat->set=0;
-	bit_fill(&(lat->cand), 9);
+void lat_init_unset(lattice *lat) {
+	lat->cnds.set=0;
+	bit_fill(&(lat->cnds.arr), 9);
+}
+
+// set down a lattice
+void lat_set(lattice *lat, int d) {
+    lat->cnds.set=1;
+    lat->number=d;
 }
 
 // whether lattice is set down
 int lat_isset(lattice *lat) {
-	return lat->set;
+	return lat->cnds.set;
 }
 
 // whether number is in candidate of a lattice
 int lat_iscand(lattice *lat, int d) {
-	return bit_has(&(lat->cand), d-1);
+	return bit_has(&(lat->cnds.arr), d-1);
 }
 
 // return first candidate
 int lat_1stcand(lattice *lat) {
 	// if(lat->set) return -1;
-	return bit_1st(&(lat->cand))+1;
+	return bit_1st(&(lat->cnds.arr))+1;
+}
+
+// number of candidate
+int lat_cand_num(lattice *lat) {
+	return cand_num(&(lat->cnds));
 }
 
 // exclude a number for unset lattice
 void lat_exclude(lattice *lat, int d) {
-	bit_unset(&(lat->cand), d-1);
+	bit_unset(&(lat->cnds.arr), d-1);
 }
