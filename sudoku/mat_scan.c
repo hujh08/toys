@@ -23,81 +23,75 @@ int scan_lats(matrix *mat, int *n, int *d) {
     return SCAN_NONE;
 }
 
-int scan_rows(matrix *mat, int *n, int *d) {
-    submat *rows=mat->rows;
-    for(int r=0; r<9; r++) {
-        if(sub_isset(rows+r)) continue;
+// general function to scan sub-matrix
+int scan_sub(number_t *nums, int *insub, int *digit) {
+    for(int i=0; i<9; i++) {
+        if(cand_isset(nums+i)) continue;
 
-        number_t *nums=rows[r].nums;
-        for(int i=0; i<9; i++) {
-            if(cand_isset(nums+i)) continue;
-
-            int nc=cand_num(nums+i);
-            if(nc==0) {
-                // printf("%i row error\n", r+1);
-                // print_sub(rows+r);
-                // print_mat(mat);
-                return SCAN_ERROR;
-            }
-            if(nc==1) {
-                int c=num_1stcand(nums+i);
-                *n=c+9*r;
-                *d=i+1;
-                return SCAN_SUCC;
-            }
+        int nc=cand_num(nums+i);
+        if(nc==0) {
+            // printf("%i row error\n", r+1);
+            // print_sub(rows+r);
+            // print_mat(mat);
+            return SCAN_ERROR;
         }
+        if(nc==1) {
+            *insub=num_1stcand(nums+i);
+            *digit=i+1;
+            return SCAN_SUCC;
+        }
+    }
+    return SCAN_NONE;
+}
+
+typedef int (*fun_id)(int , int );
+// general function for subs
+int scan_subs(submat *subs, int *n, int *d, fun_id f) {
+    int found;
+    for(int i=0; i<9; i++) {
+        if(sub_isset(subs+i)) continue;
+
+        number_t *nums=subs[i].nums;
+
+        int j;
+        found=scan_sub(nums, &j, d);
+
+        if(found==SCAN_NONE) continue;
+        if(found==SCAN_ERROR) return found;
+
+        *n=f(i, j);
+        return SCAN_SUCC;
     }
 
     return SCAN_NONE;
+}
+
+// functions to calculate id given id of sub and in sub
+int fid_row(int ofsub, int insub) {
+    return insub+9*ofsub;
+}
+
+int fid_col(int ofsub, int insub) {
+    return ofsub+9*insub;
+}
+
+int fid_blk(int ofsub, int insub) {
+    return (3*(ofsub%3)+(insub%3))+9*(3*(ofsub/3)+(insub/3));
+}
+
+// scan rows/cols/blocks
+int scan_rows(matrix *mat, int *n, int *d) {
+    submat *rows=mat->rows;
+    return scan_subs(rows, n, d, fid_row);
 }
 
 int scan_cols(matrix *mat, int *n, int *d) {
     // printf("scan cols\n");
     submat *cols=mat->cols;
-    for(int c=0; c<9; c++) {
-        // if(c==0) printf("0 cols: %i\n", sub_isset(cols+c));
-        if(sub_isset(cols+c)) continue;
-
-        number_t *nums=cols[c].nums;
-        for(int i=0; i<9; i++) {
-            // if(c==0 && i==0)
-                // printf("0 cols 0 num: %i\n", cand_isset(nums+i));
-
-            if(cand_isset(nums+i)) continue;
-
-            int nc=cand_num(nums+i);
-            if(nc==0) return SCAN_ERROR;
-            if(nc==1) {
-                int r=num_1stcand(nums+i);
-                *n=c+9*r;
-                *d=i+1;
-                return SCAN_SUCC;
-            }
-        }
-    }
-
-    return SCAN_NONE;
+    return scan_subs(cols, n, d, fid_col);
 }
 
 int scan_blks(matrix *mat, int *n, int *d) {
     submat *blks=mat->blks;
-    for(int b=0; b<9; b++) {
-        if(sub_isset(blks+b)) continue;
-
-        number_t *nums=blks[b].nums;
-        for(int i=0; i<9; i++) {
-            if(cand_isset(nums+i)) continue;
-
-            int nc=cand_num(nums+i);
-            if(nc==0) return SCAN_ERROR;
-            if(nc==1) {
-                int s=num_1stcand(nums+i);
-                *n=(3*(b%3)+(s%3))+9*(3*(b/3)+(s/3));
-                *d=i+1;
-                return SCAN_SUCC;
-            }
-        }
-    }
-
-    return SCAN_NONE;
+    return scan_subs(blks, n, d, fid_blk);
 }
