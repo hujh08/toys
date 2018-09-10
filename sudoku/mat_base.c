@@ -62,6 +62,9 @@ void mat_update(matrix *mat, int n, int d) {
 
 // del a number from candidate of a lattice
 void mat_del_latnum(matrix *mat, int n, int d) {
+    // if(lat_isset(mat->lat+n)) return;
+    // if(!lat_iscand(mat->lat+n, d)) return;
+
     int r=n/9,
         c=n-9*r,
         b=NOBLK(r, c),

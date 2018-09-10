@@ -33,7 +33,7 @@ int subs_group(matrix *mat, submat *subs, int ts) {
         barr_t arr, pos;
 
         // do for collection of numbers
-        found=gen_group(nums, lats, unset, &arr, &pos);
+        found=gen_group(nums, lats, unset-1, &arr, &pos);
 
         // if(found==SCAN_NONE) continue;
         if(found==SCAN_ERROR) return found;
@@ -51,7 +51,7 @@ int subs_group(matrix *mat, submat *subs, int ts) {
                     mat_del_latnum(mat, n, d);
                 }
             }
-            print_group(mat, ofi, arr, pos, ts);
+            print_group(mat, ofi, pos, arr, ts, MARK_NUM);
             return found;
         }
     }

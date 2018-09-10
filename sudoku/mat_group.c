@@ -4,6 +4,8 @@
     this is done after no single lattice could be established
 */
 
+#include <stdio.h>
+
 #include "sudoku.h"
 
 // combine function: select m from n
@@ -30,7 +32,7 @@ int comb_next(int arr, int n) {
 }
 
 // general function to do clustering
-int gen_group(cand_t *sub, cand_t *trans, int unset,
+int gen_group(cand_t *sub, cand_t *trans, int maxs,
                     barr_t *sub_grp, barr_t *sub_pos) {
     /*
         parameter `sub` is a collection of candidates
@@ -59,7 +61,7 @@ int gen_group(cand_t *sub, cand_t *trans, int unset,
         if(n<mins) mins=n;
     }
 
-    for(int size=mins; size<unset; size++) {
+    for(int size=mins; size<=maxs; size++) {
         barr_t arr=(1<<size)-1,
                arr_max=arr<<(9-size);
 
@@ -79,7 +81,10 @@ int gen_group(cand_t *sub, cand_t *trans, int unset,
 
             int num_u=bit_num_bin(cnds, 9);
             if(num_u>size) continue;
-            if(num_u<size) return SCAN_ERROR;
+            if(num_u<size) {
+                printf("mat group base: %i %i\n", num_u, size);
+                return SCAN_ERROR;
+            }
 
             *sub_pos=0;
             for(int i=0; i<9; i++) {

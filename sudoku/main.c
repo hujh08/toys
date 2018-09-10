@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 
     int found=mat_fill_notry(&mat);
 
-    printf("after fill without try:\n");
+    printf("\nafter fill without try:\n");
     if(found==SCAN_ERROR) {
         printf("    error for matrix\n");
         return -1;

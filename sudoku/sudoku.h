@@ -66,19 +66,23 @@ int ntry;  // number of try
 #define CROSS_ROW_BLK 2
 #define CROSS_COL_BLK 3
 
-// for sub-matrix
+// for sub-matrix and number
 #define MARK_ROW 0
 #define MARK_COL 1
 #define MARK_BLK 2
-
-// for row-col group with same number
-#define GRUP_NUM 3
+#define MARK_NUM 3
 
 // function to calculate id
+// convert sub-mat id to global id
 typedef int (*fun_id)(int , int );
 extern int fid_row(int , int );
 extern int fid_col(int , int );
 extern int fid_blk(int , int );
+// convert global id to sub-mat id
+typedef void (*fun_subid)(int , int *, int *);
+extern void fsubid_row(int , int *, int *);
+extern void fsubid_col(int , int *, int *);
+extern void fsubid_blk(int , int *, int *);
 
 // functions for io
 extern void readtxt(char *, matrix *);
@@ -87,7 +91,7 @@ extern void print_sub(submat *);
 extern void print_mat(matrix *);
 extern void print_update(matrix *, int , char *);
 extern void print_cross(matrix *, int , int , int , int );
-extern void print_group(matrix *, int , barr_t , barr_t , int );
+extern void print_group(matrix *, int , barr_t , barr_t , int , int );
 extern void print_result(matrix *);
 
 // function for arguments
@@ -97,6 +101,7 @@ extern void parse_args(int , char **, matrix *);
 extern void lat_init_unset(lattice *);
 extern void lat_set(lattice *, int );
 extern int lat_isset(lattice *);
+extern int lat_isnum(lattice *, int );
 extern int lat_iscand(lattice *, int );
 extern int lat_1stcand(lattice *);
 extern int lat_num(lattice *);
@@ -104,8 +109,10 @@ extern int lat_cand_num(lattice *);
 extern void lat_del_num(lattice *, int );
 
 // functions for candidate structure
-extern int cand_1stcand(number_t *);
 extern void cand_init_unset(number_t *);
+extern void cand_init_unset_empty(number_t *);
+extern void cand_set(cand_t *, int );
+extern int cand_1stcand(number_t *);
 extern int cand_isset(cand_t *);
 extern int cand_num(cand_t *);
 extern barr_t cand_bins(cand_t *);

@@ -19,6 +19,11 @@ int lat_isset(lattice *lat) {
 	return lat->cnds.set;
 }
 
+// whether lattice is set to num
+int lat_isnum(lattice *lat, int d) {
+	return lat->cnds.set && lat->number==d;
+}
+
 // whether number is in candidate of a lattice
 int lat_iscand(lattice *lat, int d) {
 	return bit_has(&(lat->cnds.arr), d-1);

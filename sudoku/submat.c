@@ -17,7 +17,7 @@ void sub_set(submat *sub, int d) {
 
 // add a candidate lattice for a number
 void sub_add(submat *sub, int li, int d) {
-    bit_set(&(sub->nums[d-1].arr), li);
+    cand_set(sub->nums+d-1, li);
 }
 
 // exclude a candidate number in a lattice
@@ -37,13 +37,22 @@ int sub_isset(submat *sub) {
 }
 
 // functions for all kinds of cand structure
-void cand_init_unset(number_t *num) {
-    num->set=0;
-    bit_fill(&(num->arr), 9);
+void cand_init_unset(cand_t *cnd) {
+    cnd->set=0;
+    bit_fill(&(cnd->arr), 9);
+}
+void cand_init_unset_empty(cand_t *cnd) {
+    cnd->set=0;
+    bit_clear(&(cnd->arr));
 }
 
-int cand_1stcand(number_t *num) {
-    return bit_1st(&(num->arr));
+// add a binary bit
+void cand_set(cand_t *cnd, int n) {
+    bit_set(&(cnd->arr), n);
+}
+
+int cand_1stcand(cand_t *cnd) {
+    return bit_1st(&(cnd->arr));
 }
 
 int cand_isset(cand_t *cnd) {

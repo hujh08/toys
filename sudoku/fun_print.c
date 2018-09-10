@@ -100,36 +100,28 @@ void print_cross(matrix *mat, int cross, int s0, int s1, int d) {
                 sub0, s0+1, sub1, s1+1, d);
 }
 
-void print_group(matrix *mat, int b, 
-                 barr_t val, barr_t pos, int group) {
+static char *names[]={"row", "col", "blk", "num"};
+
+void print_group(matrix *mat, int b, barr_t pos0, barr_t pos1, int t0, int t1) {
     if(!mat->verbose) return;
 
-    char *typeg, *typep, *typev;
-    barr_t tmp;
-    switch(group) {
-        case MARK_ROW:
-            typeg="row"; typep="col"; typev="num"; break;
-        case MARK_COL:
-            typeg="col"; typep="row"; typev="num"; break;
-        case MARK_BLK:
-            typeg="blk"; typep="lat"; typev="num"; break;
-        case GRUP_NUM:
-            typeg="num";
-            tmp=pos; pos=val; val=tmp;
-            typep="row"; typev="col";
-            break;
-        default:
-            printf("error for cross print\n");
-            exit(-1);
+    char *nameb, *name0, *name1=names[t1];
+    if(t1==MARK_NUM) { // group in number-sub plane
+        nameb=names[t0];
+        if(t0==MARK_BLK) name0="lat";
+        else name0=names[MARK_ROW+MARK_COL-t0];
+    } else {
+        nameb="num";
+        name0=names[t0];
     }
 
-    printf("group: %s %i, %s ", typeg, b+1, typep);
+    printf("group: %s %i, %ss ", nameb, b+1, name0);
     for(int i=0; i<9; i++) {
-        if(pos&(1<<i)) printf("%i", i+1);
+        if(pos0&(1<<i)) printf("%i", i+1);
     }
-    printf(", %s ", typev);
+    printf(", %ss ", name1);
     for(int i=0; i<9; i++) {
-        if(val&(1<<i)) printf("%i", i+1);
+        if(pos1&(1<<i)) printf("%i", i+1);
     }
     printf("\n");
 }
