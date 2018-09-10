@@ -2,12 +2,18 @@
     extract a group, as a digit, their digits are determined
 
     this is done after no single lattice could be established
+
+    group in same sub-matrix
 */
 
 #include "sudoku.h"
 
+static fun_id func_ids[]={fid_row, fid_col, fid_blk};
+
 // group for sub-matrixs
-int subs_group(matrix *mat, submat *subs, fun_id f) {
+int subs_group(matrix *mat, submat *subs, int ts) {
+    fun_id f=func_ids[ts];
+
     int found=0;
     for(int ofi=0; ofi<9; ofi++) {
         if(sub_isset(subs+ofi)) continue;
@@ -45,6 +51,7 @@ int subs_group(matrix *mat, submat *subs, fun_id f) {
                     mat_del_latnum(mat, n, d);
                 }
             }
+            print_group(mat, ofi, arr, pos, ts);
             return found;
         }
     }
@@ -53,18 +60,18 @@ int subs_group(matrix *mat, submat *subs, fun_id f) {
 }
 
 int rows_group(matrix *mat) {
-    return subs_group(mat, mat->rows, fid_row);
+    return subs_group(mat, mat->rows, MARK_ROW);
 }
 
 int cols_group(matrix *mat) {
-    return subs_group(mat, mat->cols, fid_col);
+    return subs_group(mat, mat->cols, MARK_COL);
 }
 
 int blks_group(matrix *mat) {
-    return subs_group(mat, mat->blks, fid_blk);
+    return subs_group(mat, mat->blks, MARK_BLK);
 }
 
-int mat_group_numsub(matrix *mat) {
+int mat_group_sub(matrix *mat) {
     int found;
 
     found=rows_group(mat);

@@ -24,6 +24,7 @@ int blks_cross(matrix *mat) {
 
             barr_t lat_arr=cand_bins(nums+d);
 
+            // search lattices in same row
             int rb, r, c, n, mr=mark_row;
             changed=0;
             for(rb=0; rb<3; rb++, mr<<=3) {
@@ -40,7 +41,10 @@ int blks_cross(matrix *mat) {
                     }
                 }
 
-                if(changed) return SCAN_SUCC;
+                if(changed) {
+                    print_cross(mat, CROSS_BLK_ROW, b, r, d+1);
+                    return SCAN_SUCC;
+                }
             }
 
             int cb, mc=mark_col;
@@ -57,7 +61,10 @@ int blks_cross(matrix *mat) {
                         mat_del_latnum(mat, n, d+1);
                     }
                 }
-                if(changed) return SCAN_SUCC;
+                if(changed) {
+                    print_cross(mat, CROSS_BLK_COL, b, c, d+1);
+                    return SCAN_SUCC;
+                }
             }
         }
     }

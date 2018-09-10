@@ -4,7 +4,7 @@
 
 #include "sudoku.h"
 
-int mat_group_rowcol(matrix *mat) {
+int mat_group_num(matrix *mat) {
     submat *rows=mat->rows,
            *cols=mat->cols;
 
@@ -45,6 +45,7 @@ int mat_group_rowcol(matrix *mat) {
                     mat_del_latnum(mat, n, d+1);
                 }
             }
+            print_group(mat, d, pos_row, pos_col, GRUP_NUM);
             return found;
         }
     }

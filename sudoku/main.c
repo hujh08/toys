@@ -22,12 +22,10 @@ int main(int argc, char **argv)
 
     readtxt(filename, &mat);
 
-    print_sub(mat.blks+1);
-    printf("\n");
-
     printf("unset lattices: %i\n", mat.unset);
     printf("initial state:\n");
     print_mat(&mat);
+    printf("\n");
 
     nsol=0;
     ntry=0;

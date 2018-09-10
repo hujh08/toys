@@ -11,6 +11,7 @@ int mat_fill_notry(matrix *mat) {
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) {
             mat_update(mat, n, d);
+            print_update(mat, n, "lats");
             continue;
         }
 
@@ -18,6 +19,7 @@ int mat_fill_notry(matrix *mat) {
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) {
             mat_update(mat, n, d);
+            print_update(mat, n, "rows");
             continue;
         }
 
@@ -25,6 +27,7 @@ int mat_fill_notry(matrix *mat) {
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) {
             mat_update(mat, n, d);
+            print_update(mat, n, "cols");
             continue;
         }
 
@@ -32,6 +35,7 @@ int mat_fill_notry(matrix *mat) {
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) {
             mat_update(mat, n, d);
+            print_update(mat, n, "blks");
             continue;
         }
 
@@ -40,11 +44,11 @@ int mat_fill_notry(matrix *mat) {
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) continue;
 
-        found=mat_group_numsub(mat);
+        found=mat_group_sub(mat);
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) continue;
 
-        found=mat_group_rowcol(mat);
+        found=mat_group_num(mat);
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) continue;
 

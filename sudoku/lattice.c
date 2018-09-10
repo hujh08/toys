@@ -30,6 +30,11 @@ int lat_1stcand(lattice *lat) {
 	return bit_1st(&(lat->cnds.arr))+1;
 }
 
+// return number of lat
+int lat_num(lattice *lat) {
+	return lat->number;
+}
+
 // number of candidate
 int lat_cand_num(lattice *lat) {
 	return cand_num(&(lat->cnds));

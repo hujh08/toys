@@ -54,10 +54,25 @@ int ntry;  // number of try
 // for block
 #define NOBLK(r, c) ((c/3)+3*(r/3))  // id of block
 #define NIBLK(r, c) ((c%3)+3*(r%3))  // id in block
+
 // for scan result
 #define SCAN_ERROR -1
 #define SCAN_NONE  0
 #define SCAN_SUCC  1
+
+// for cross analysis
+#define CROSS_BLK_ROW 0
+#define CROSS_BLK_COL 1
+#define CROSS_ROW_BLK 2
+#define CROSS_COL_BLK 3
+
+// for sub-matrix
+#define MARK_ROW 0
+#define MARK_COL 1
+#define MARK_BLK 2
+
+// for row-col group with same number
+#define GRUP_NUM 3
 
 // function to calculate id
 typedef int (*fun_id)(int , int );
@@ -70,6 +85,9 @@ extern void readtxt(char *, matrix *);
 extern void print_lat(lattice *);
 extern void print_sub(submat *);
 extern void print_mat(matrix *);
+extern void print_update(matrix *, int , char *);
+extern void print_cross(matrix *, int , int , int , int );
+extern void print_group(matrix *, int , barr_t , barr_t , int );
 extern void print_result(matrix *);
 
 // function for arguments
@@ -81,6 +99,7 @@ extern void lat_set(lattice *, int );
 extern int lat_isset(lattice *);
 extern int lat_iscand(lattice *, int );
 extern int lat_1stcand(lattice *);
+extern int lat_num(lattice *);
 extern int lat_cand_num(lattice *);
 extern void lat_del_num(lattice *, int );
 
@@ -117,6 +136,6 @@ extern int scan_blks(matrix *, int *, int *);
 // strategies to decrease candidates of lattices
 extern int gen_group(cand_t *, cand_t *, int ,
                      barr_t *, barr_t *);
-extern int mat_group_numsub(matrix *);
-extern int mat_group_rowcol(matrix *);
+extern int mat_group_sub(matrix *);
+extern int mat_group_num(matrix *);
 extern int mat_cross(matrix *);

@@ -1,5 +1,6 @@
 // print function
 
+#include <stdlib.h>
 #include <stdio.h>
 
 #include "sudoku.h"
@@ -61,6 +62,75 @@ void print_mat(matrix *mat) {
         }
         printf("\n");
     }
+}
+
+// print lattice update
+void print_update(matrix *mat, int n, char *scan) {
+    if(!mat->verbose) return;
+    int r=n/9,
+        c=n-9*r,
+        d=lat_num(mat->lat+n);
+    printf("scan %s found: lat (%i, %i), num %i\n",
+                scan, r+1, c+1, d);
+    printf("\n");
+    print_mat(mat);
+    printf("\n");
+}
+
+// print cross analysis
+void print_cross(matrix *mat, int cross, int s0, int s1, int d) {
+    if(!mat->verbose) return;
+
+    char *sub0, *sub1;
+    switch(cross) {
+        case CROSS_BLK_ROW:
+            sub0="blk"; sub1="row"; break;
+        case CROSS_BLK_COL:
+            sub0="blk"; sub1="col"; break;
+        case CROSS_ROW_BLK:
+            sub0="row"; sub1="blk"; break;
+        case CROSS_COL_BLK:
+            sub0="col"; sub1="blk"; break;
+        default:
+            printf("error for cross print\n");
+            exit(-1);
+    }
+
+    printf("cross: %s %i, %s %i, num %i\n",
+                sub0, s0+1, sub1, s1+1, d);
+}
+
+void print_group(matrix *mat, int b, 
+                 barr_t val, barr_t pos, int group) {
+    if(!mat->verbose) return;
+
+    char *typeg, *typep, *typev;
+    barr_t tmp;
+    switch(group) {
+        case MARK_ROW:
+            typeg="row"; typep="col"; typev="num"; break;
+        case MARK_COL:
+            typeg="col"; typep="row"; typev="num"; break;
+        case MARK_BLK:
+            typeg="blk"; typep="lat"; typev="num"; break;
+        case GRUP_NUM:
+            typeg="num";
+            tmp=pos; pos=val; val=tmp;
+            typep="row"; typev="col";
+            break;
+        default:
+            printf("error for cross print\n");
+            exit(-1);
+    }
+
+    printf("group: %s %i, %s ", typeg, b+1, typep);
+    for(int i=0; i<9; i++) {
+        if(pos&(1<<i)) printf("%i", i+1);
+    }
+    printf(", %s ", typev);
+    for(int i=0; i<9; i++) {
+        if(val&(1<<i)) printf("%i", i+1);
+    }
     printf("\n");
 }
 
@@ -70,4 +140,5 @@ void print_result(matrix *mat) {
     printf("total try: %i\n", ntry);
     printf("level of try: %i\n", mat->ntry);
     print_mat(mat);
+    printf("\n");
 }
