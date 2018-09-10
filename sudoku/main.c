@@ -11,24 +11,35 @@ int main(int argc, char **argv)
 {
     char *filename="input.txt";
 
-    printf("input: %s\n", filename);
+    printf("input: %s\n\n", filename);
 
     matrix mat;
     mat.ntry=0;
 
     parse_args(argc, argv, &mat);
 
+    mat_init_unset(&mat);
+    // printf("empty state:\n");
+    // print_mat(&mat);
+
+    // int n=2;
+    // printf("row %i\n", n+1);
+    // print_sub(mat.rows+n);
+    // printf("\n");
+
     readtxt(filename, &mat);
+
+    print_sub(mat.blks+1);
+    printf("\n");
 
     printf("unset lattices: %i\n", mat.unset);
     printf("initial state:\n");
     print_mat(&mat);
 
-    // int n=32;
     // printf("state for lat %i\n", n+1);
     // print_lat(mat.lat+n);
 
-    mat_analysis(&mat);
+    // mat_analysis(&mat);
 
     // print_lat(mat.lat+n);
     // printf("\n");

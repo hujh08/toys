@@ -81,28 +81,29 @@ extern int lat_isset(lattice *);
 extern int lat_iscand(lattice *, int );
 extern int lat_1stcand(lattice *);
 extern int lat_cand_num(lattice *);
-extern void lat_exclude(lattice *, int );
+extern void lat_del_num(lattice *, int );
 
 // functions for candidate structure
+extern int cand_1stcand(number_t *);
+extern void cand_init_unset(number_t *);
 extern int cand_isset(cand_t *);
 extern int cand_num(cand_t *);
 extern barr_t cand_bins(cand_t *);
 
-// functions for number structure
-extern void num_init(number_t *);
-extern int num_1stcand(number_t *);
-
 // functions for sub-matrix
-extern void sub_init(submat *);
+extern void sub_init_unset(submat *);
 extern void sub_set(submat *, int );
 extern void sub_add(submat *, int , int );
 extern void sub_del_latnum(submat *, int , int );
 extern void sub_del_lat(submat *, int );
 extern int sub_isset(submat *);
 
-// functions used to fill lattices
-extern int mat_analysis(matrix *);
+// basic functions for matrix
+extern void mat_init_unset(matrix *);
 extern void mat_update(matrix *, int , int );
+extern void mat_del_latnum(matrix *, int , int );
+
+// functions to fill matrix
 extern void mat_fill_try(matrix *);
 extern int mat_fill_notry(matrix *);
 
@@ -112,5 +113,9 @@ extern int scan_rows(matrix *, int *, int *);
 extern int scan_cols(matrix *, int *, int *);
 extern int scan_blks(matrix *, int *, int *);
 
-// functions to matrix groups
-extern int mat_group(matrix *);
+// strategies to decrease candidates of lattices
+extern int gen_group(cand_t *, cand_t *, int , int ,
+                     barr_t *, barr_t *);
+extern int mat_group_numsub(matrix *);
+extern int mat_group_rowcol(matrix *);
+extern int mat_cross(matrix *);

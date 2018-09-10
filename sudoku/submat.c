@@ -5,9 +5,9 @@
 #include "sudoku.h"
 
 
-void sub_init(submat *sub) {
+void sub_init_unset(submat *sub) {
     sub->unset=9;
-    for(int i=0; i<9; i++) num_init(sub->nums+i);
+    for(int i=0; i<9; i++) cand_init_unset(sub->nums+i);
 }
 
 // set down a number
@@ -66,17 +66,16 @@ void print_sub(submat *sub) {
     }
 }
 
-// function about number
-void num_init(number_t *num) {
+// functions for all kinds of cand structure
+void cand_init_unset(number_t *num) {
     num->set=0;
-    bit_clear(&(num->arr));
+    bit_fill(&(num->arr), 9);
 }
 
-int num_1stcand(number_t *num) {
+int cand_1stcand(number_t *num) {
     return bit_1st(&(num->arr));
 }
 
-// functions for all kinds of cand structure
 int cand_isset(cand_t *cnd) {
     return cnd->set;
 }

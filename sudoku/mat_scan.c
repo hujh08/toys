@@ -36,7 +36,7 @@ int scan_sub(number_t *nums, int *insub, int *digit) {
             return SCAN_ERROR;
         }
         if(nc==1) {
-            *insub=num_1stcand(nums+i);
+            *insub=cand_1stcand(nums+i);
             *digit=i+1;
             return SCAN_SUCC;
         }

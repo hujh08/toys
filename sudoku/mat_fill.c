@@ -62,8 +62,18 @@ int mat_fill_notry(matrix *mat) {
             continue;
         }
 
-        found=mat_group(mat);
+        // strategies to decrease candidates
+        found=mat_cross(mat);
         if(found==SCAN_ERROR) return found;
+        if(found==SCAN_SUCC) continue;
+
+        found=mat_group_numsub(mat);
+        if(found==SCAN_ERROR) return found;
+        if(found==SCAN_SUCC) continue;
+
+        found=mat_group_rowcol(mat);
+        if(found==SCAN_ERROR) return found;
+        if(found==SCAN_SUCC) continue;
 
         if(found==SCAN_NONE) return found;
     }

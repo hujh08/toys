@@ -9,9 +9,6 @@
 #include "sudoku.h"
 
 void readtxt(char *filename, matrix *mat) {
-    lattice *lat=mat->lat;
-    mat->unset=81;
-
     char line[12];
     FILE *fp=fopen(filename, "r");
     int n=0;
@@ -24,11 +21,11 @@ void readtxt(char *filename, matrix *mat) {
 
         for(int i=0; i<9; i++) {
             if(line[i]!='0') {
-                lat_set(lat+n, line[i]-'0');
+                mat_update(mat, n, line[i]-'0');
             	// lat[n].set=1;
             	// lat[n].number=line[i]-'0';
-                mat->unset--;
-            } else lat_init_unset(lat+n);
+                // mat->unset--;
+            } //else lat_init_unset(lat+n);
             n++;
         }
     }

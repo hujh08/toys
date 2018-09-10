@@ -25,11 +25,11 @@ void print_mat(matrix *mat) {
 	int n=0;
 	for(int j=0; j<9; j++) {
 		if(j==3 || j==6) printf("\n");
-		printf("        ");
+		printf("       ");
 		for(int i=0; i<9; i++, n++) {
 			if(i==3 || i==6) printf("  ");
-			if(lat_isset(lat+n)) printf("%i ", lat[n].number);
-			else printf("x ");
+			if(lat_isset(lat+n)) printf(" %i", lat[n].number);
+			else printf(" x");
 		}
 		printf("\n");
 	}
@@ -70,6 +70,6 @@ int lat_cand_num(lattice *lat) {
 }
 
 // exclude a number for unset lattice
-void lat_exclude(lattice *lat, int d) {
+void lat_del_num(lattice *lat, int d) {
 	bit_unset(&(lat->cnds.arr), d-1);
 }
