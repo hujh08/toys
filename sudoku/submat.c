@@ -1,9 +1,6 @@
 // functions for sub-matrix
 
-#include <stdio.h>
-
 #include "sudoku.h"
-
 
 void sub_init_unset(submat *sub) {
     sub->unset=9;
@@ -37,33 +34,6 @@ void sub_del_lat(submat *sub, int li) {
 // whether lattice is set down
 int sub_isset(submat *sub) {
     return sub->unset==0;
-}
-
-// io functions
-void print_sub(submat *sub) {
-    if(sub->unset==0) {
-        printf("sub-matrix is set down\n");
-        return;
-    }
-
-    number_t *nums=sub->nums;
-
-    printf("%i set numbers:", 9-sub->unset);
-    for(int i=0; i<9; i++) {
-        if(cand_isset(nums+i)) printf(" %i", i+1);
-    }
-    printf("\n");
-    for(int i=0; i<9; i++) {
-        if(cand_isset(nums+i)) continue;
-        printf("number %i: %i lat", i+1, cand_num(nums+i));
-        if(!cand_isset(nums+i)) {
-            for(int n=0; n<9; n++) {
-                if(bit_has(&(nums[i].arr), n))
-                    printf(" %i", n+1);
-            }
-            printf("\n");
-        }
-    }
 }
 
 // functions for all kinds of cand structure

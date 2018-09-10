@@ -1,7 +1,5 @@
 // scan matrix to find out a lattice to fill
 
-#include <stdio.h>
-
 #include "sudoku.h"
 
 // return if found lattice
@@ -11,7 +9,6 @@ int scan_lats(matrix *mat, int *n, int *d) {
     for(int i=0; i<81; i++) {
         if(lat_isset(lat+i)) continue;
         int nc=lat_cand_num(lat+i);  // number of candidates
-        // if(toset==32) printf("num: %i\n", nc);
         if(nc==0) return SCAN_ERROR;
         if(nc==1) {
             *n=i;
@@ -30,9 +27,6 @@ int scan_sub(number_t *nums, int *insub, int *digit) {
 
         int nc=cand_num(nums+i);
         if(nc==0) {
-            // printf("%i row error\n", r+1);
-            // print_sub(rows+r);
-            // print_mat(mat);
             return SCAN_ERROR;
         }
         if(nc==1) {
@@ -72,7 +66,6 @@ int scan_rows(matrix *mat, int *n, int *d) {
 }
 
 int scan_cols(matrix *mat, int *n, int *d) {
-    // printf("scan cols\n");
     submat *cols=mat->cols;
     return scan_subs(cols, n, d, fid_col);
 }

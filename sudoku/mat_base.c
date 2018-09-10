@@ -1,7 +1,5 @@
 // basic operation of matrix
 
-#include <stdio.h>
-
 #include "sudoku.h"
 
 // actually produce a empty matrix
@@ -24,9 +22,6 @@ void mat_init_unset(matrix *mat) {
 void mat_update(matrix *mat, int n, int d) {
     lattice *lat=mat->lat;
 
-    // printf("update: lat %i, num %i\n", n+1, d);
-    // print_mat(mat);
-
     lat_set(lat+n, d);
     mat->unset--;
 
@@ -39,8 +34,6 @@ void mat_update(matrix *mat, int n, int d) {
         b=NOBLK(r, c),
         s=NIBLK(r, c);
 
-    // printf("rcbs: %i %i %i %i\n", r, c, b, s);
-
     // set down a number
     sub_set(rows+r, d);
     sub_set(cols+c, d);
@@ -51,30 +44,20 @@ void mat_update(matrix *mat, int n, int d) {
     sub_del_lat(cols+c, r);
     sub_del_lat(blks+b, s);
 
-    // print_sub(mat->blks);
-
     // handle row and col
     for(int i=0; i<9; i++) {
         mat_del_latnum(mat, i+9*r, d);
         mat_del_latnum(mat, c+9*i, d);
     }
 
-    // printf("after handle sub touching row/col\n");
-    // print_sub(mat->rows+2);
-
     // handle block
     int br=(r/3)*3,   // id of the block's start lat
         bc=(c/3)*3;
-    // printf("brc: %i %i\n", br, bc);
     for(int j=0; j<3; j++) {
         for(int i=0; i<3; i++) {
             mat_del_latnum(mat, bc+i+9*(br+j), d);
         }
     }
-
-    // print_sub(mat->blks);
-    // print_sub(mat->cols);
-    // print_sub(mat->rows+2);
 }
 
 // del a number from candidate of a lattice

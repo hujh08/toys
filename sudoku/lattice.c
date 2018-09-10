@@ -1,40 +1,6 @@
 // some functions for basic operation
 
-#include <stdio.h>
-
 #include "sudoku.h"
-
-// print function
-void print_lat(lattice *lat) {
-	if(lat_isset(lat)) {
-		printf("set\n");
-		printf("number: %i\n", lat->number);
-	} else {
-		printf("unset\n");
-		printf("number of possible: %i\n", lat_cand_num(lat));
-		printf("candidate:");
-		for(int i=1; i<=9; i++) {
-			if(lat_iscand(lat, i)) printf(" %i", i);
-		}
-		printf("\n");
-	}
-}
-
-void print_mat(matrix *mat) {
-	lattice *lat=mat->lat;
-	int n=0;
-	for(int j=0; j<9; j++) {
-		if(j==3 || j==6) printf("\n");
-		printf("       ");
-		for(int i=0; i<9; i++, n++) {
-			if(i==3 || i==6) printf("  ");
-			if(lat_isset(lat+n)) printf(" %i", lat[n].number);
-			else printf(" x");
-		}
-		printf("\n");
-	}
-    printf("\n");
-}
 
 // initial an unset lattice
 void lat_init_unset(lattice *lat) {

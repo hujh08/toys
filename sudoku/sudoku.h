@@ -67,9 +67,10 @@ extern int fid_blk(int , int );
 
 // functions for io
 extern void readtxt(char *, matrix *);
-extern void print_mat(matrix *);
 extern void print_lat(lattice *);
 extern void print_sub(submat *);
+extern void print_mat(matrix *);
+extern void print_result(matrix *);
 
 // function for arguments
 extern void parse_args(int , char **, matrix *);
@@ -114,7 +115,7 @@ extern int scan_cols(matrix *, int *, int *);
 extern int scan_blks(matrix *, int *, int *);
 
 // strategies to decrease candidates of lattices
-extern int gen_group(cand_t *, cand_t *, int , int ,
+extern int gen_group(cand_t *, cand_t *, int ,
                      barr_t *, barr_t *);
 extern int mat_group_numsub(matrix *);
 extern int mat_group_rowcol(matrix *);
