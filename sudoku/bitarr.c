@@ -53,6 +53,10 @@ void bit_print_bin(barr_t b, int len) {
     }
 }
 
+void bit_print_arrbin(bitarr b, int len) {
+    bit_print_bin(b.bitarr,len);
+}
+
 // if contain a element
 int bit_has(bitarr *bta, int n) {
     return (bta->bitarr)&(1<<n);

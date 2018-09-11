@@ -4,7 +4,7 @@
     this must be done after mat_cross
 */
 
-// #include <stdio.h>
+#include <stdio.h>
 
 #include "sudoku.h"
 
@@ -16,6 +16,7 @@ static fun_subid func_subids[]={fsubid_row, fsubid_col, fsubid_blk};
 int ext_subsub(lattice *lats, int d, fun_subid f0, fun_subid f1,
                     cand_t *cnds0, cand_t *cnds1) {
     // d starts from 0
+    // printf("ext subsub for num %i\n", d+1);
     // initiate
     for(int b=0; b<9; b++) cand_init_unset_empty(cnds0+b);
     for(int b=0; b<9; b++) cand_init_unset_empty(cnds1+b);
@@ -26,7 +27,9 @@ int ext_subsub(lattice *lats, int d, fun_subid f0, fun_subid f1,
         f1(n, &n1, &tmp);
 
         if(lat_isnum(lats+n, d+1)) cnds0[n0].set=cnds1[n1].set=1;
-        else if(lat_iscand(lats+n, d+1)) {
+        if(lat_isset(lats+n)) continue;
+        if(lat_iscand(lats+n, d+1)) {
+            // printf("got %i: %i %i\n", n, n0+1, n1+1);
             cand_set(cnds0+n0, n1);
             cand_set(cnds1+n1, n0);
         }
@@ -45,6 +48,7 @@ int ext_subsub(lattice *lats, int d, fun_subid f0, fun_subid f1,
 
 int mat_group_subsub(matrix *mat, int t0, int t1) {
     // printf("group subsub: %i %i\n", t0, t1);
+    // print_mat(mat);
     fun_subid f0=func_subids[t0],
               f1=func_subids[t1];
 

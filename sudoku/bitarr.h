@@ -21,6 +21,7 @@ extern void bit_unset(bitarr *, int );
 // io functions
 extern void bit_print(bitarr *);
 extern void bit_print_bin(barr_t , int );
+extern void bit_print_arrbin(bitarr , int );
 
 // functions to determine something
 extern int bit_has(bitarr *, int );

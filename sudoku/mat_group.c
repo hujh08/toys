@@ -61,6 +61,12 @@ int gen_group(cand_t *sub, cand_t *trans, int maxs,
         if(n<mins) mins=n;
     }
 
+    // printf("mins in group: %i\n", mins);
+    // printf("group cnds\n");
+    // print_cnds_bin(sub);
+    // printf("\n");
+    // print_cnds_bin(trans);
+
     for(int size=mins; size<=maxs; size++) {
         barr_t arr=(1<<size)-1,
                arr_max=arr<<(9-size);

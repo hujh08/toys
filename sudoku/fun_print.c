@@ -48,6 +48,20 @@ void print_sub(submat *sub) {
     }
 }
 
+// print arrray candidate using binary bit
+void print_cnd_bin(cand_t cnd) {
+    if(cand_isset(&cnd)) {
+        printf("xxxxxxxxx\n");
+        return;
+    }
+    bit_print_arrbin(cnd.arr, 9);
+    printf("\n");
+}
+
+void print_cnds_bin(cand_t *cnds) {
+    for(int i=0; i<9; i++) print_cnd_bin(cnds[i]);
+}
+
 // print matrix
 void print_mat(matrix *mat) {
     lattice *lat=mat->lat;

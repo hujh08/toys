@@ -88,6 +88,8 @@ extern void fsubid_blk(int , int *, int *);
 extern void readtxt(char *, matrix *);
 extern void print_lat(lattice *);
 extern void print_sub(submat *);
+extern void print_cnd_bin(cand_t );
+extern void print_cnds_bin(cand_t *);
 extern void print_mat(matrix *);
 extern void print_update(matrix *, int , char *);
 extern void print_cross(matrix *, int , int , int , int );
