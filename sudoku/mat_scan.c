@@ -21,7 +21,7 @@ int scan_lats(matrix *mat, int *n, int *d) {
 }
 
 // general function to scan sub-matrix
-int scan_sub(number_t *nums, int *insub, int *digit) {
+int scan_sub(cand_t *nums, int *insub, int *digit) {
     for(int i=0; i<9; i++) {
         if(cand_isset(nums+i)) continue;
 
@@ -44,7 +44,7 @@ int scan_subs(submat *subs, int *n, int *d, fun_id f) {
     for(int i=0; i<9; i++) {
         if(sub_isset(subs+i)) continue;
 
-        number_t *nums=subs[i].nums;
+        cand_t *nums=subs[i].nums;
 
         int j;
         found=scan_sub(nums, &j, d);

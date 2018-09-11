@@ -28,7 +28,7 @@ void print_sub(submat *sub) {
         return;
     }
 
-    number_t *nums=sub->nums;
+    cand_t *nums=sub->nums;
 
     printf("%i set numbers:", 9-sub->unset);
     for(int i=0; i<9; i++) {

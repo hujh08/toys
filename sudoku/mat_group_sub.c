@@ -25,7 +25,7 @@ int subs_group(matrix *mat, submat *subs, int ts) {
             if(!cand_isset(lats+i)) unset_lat++;
         }
 
-        number_t *nums=subs[ofi].nums;
+        cand_t *nums=subs[ofi].nums;
         int unset=subs[ofi].unset;
 
         if(unset!=unset_lat) return SCAN_ERROR;

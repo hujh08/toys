@@ -20,14 +20,6 @@ typedef struct
     cand_t cnds;
 } lattice;
 
-// store for candidate lattices for a number
-// typedef struct
-// {
-// 	int set;
-// 	bitarr cand;
-// } number_t;
-typedef cand_t number_t;
-
 // structure for sub-matrix, i.e. row, column, block
 typedef struct
 {
@@ -111,10 +103,10 @@ extern int lat_cand_num(lattice *);
 extern void lat_del_num(lattice *, int );
 
 // functions for candidate structure
-extern void cand_init_unset(number_t *);
-extern void cand_init_unset_empty(number_t *);
+extern void cand_init_unset(cand_t *);
+extern void cand_init_unset_empty(cand_t *);
 extern void cand_set(cand_t *, int );
-extern int cand_1stcand(number_t *);
+extern int cand_1stcand(cand_t *);
 extern int cand_isset(cand_t *);
 extern int cand_num(cand_t *);
 extern barr_t cand_bins(cand_t *);

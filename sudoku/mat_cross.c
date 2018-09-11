@@ -18,7 +18,7 @@ int blks_cross(matrix *mat) {
         int ms_row=mask_olp<<(3*bc),
             ms_col=mask_olp<<(3*br);
         
-        number_t *nums=blks[b].nums;
+        cand_t *nums=blks[b].nums;
         for(int d=0; d<9; d++) {
             if(cand_isset(nums+d)) continue;
 
@@ -85,7 +85,7 @@ int rows_cross(matrix *mat) {
 
         int mask=mask_olp<<(3*rb);
         
-        number_t *nums=rows[r].nums;
+        cand_t *nums=rows[r].nums;
         for(int d=0; d<9; d++) {
             if(cand_isset(nums+d)) continue;
 
@@ -130,7 +130,7 @@ int cols_cross(matrix *mat) {
 
         int mask=mask_olp<<cb;
 
-        number_t *nums=cols[c].nums;
+        cand_t *nums=cols[c].nums;
         for(int d=0; d<9; d++) {
             if(cand_isset(nums+d)) continue;
 
