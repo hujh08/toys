@@ -39,7 +39,7 @@ int mat_fill_notry(matrix *mat) {
             continue;
         }
 
-        // strategies to decrease candidates
+        // strategies to reduce candidates
         found=mat_cross(mat);
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) continue;
@@ -51,6 +51,11 @@ int mat_fill_notry(matrix *mat) {
         found=mat_group_num(mat);
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) continue;
+        /*
+            comment about group_num:
+                mat_cross can be seen as a special mat_group_num
+                    which is done in col/row-blk plane and group size=1
+        */
 
         if(found==SCAN_NONE) return found;
     }

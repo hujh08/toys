@@ -139,7 +139,7 @@ extern int scan_rows(matrix *, int *, int *);
 extern int scan_cols(matrix *, int *, int *);
 extern int scan_blks(matrix *, int *, int *);
 
-// strategies to decrease candidates of lattices
+// strategies to reduce candidates of lattices
 extern int gen_group(cand_t *, cand_t *, int ,
                      barr_t *, barr_t *);
 extern int mat_group_sub(matrix *);
