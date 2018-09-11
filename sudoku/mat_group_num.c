@@ -4,7 +4,7 @@
     this must be done after mat_cross
 */
 
-#include <stdio.h>
+// #include <stdio.h>
 
 #include "sudoku.h"
 

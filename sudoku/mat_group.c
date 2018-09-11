@@ -4,7 +4,7 @@
     this is done after no single lattice could be established
 */
 
-#include <stdio.h>
+// #include <stdio.h>
 
 #include "sudoku.h"
 
@@ -61,11 +61,7 @@ int gen_group(cand_t *sub, cand_t *trans, int maxs,
         if(n<mins) mins=n;
     }
 
-    // printf("mins in group: %i\n", mins);
-    // printf("group cnds\n");
-    // print_cnds_bin(sub);
-    // printf("\n");
-    // print_cnds_bin(trans);
+    // print_group_debug(mat, sub, trans);
 
     for(int size=mins; size<=maxs; size++) {
         barr_t arr=(1<<size)-1,
@@ -87,10 +83,7 @@ int gen_group(cand_t *sub, cand_t *trans, int maxs,
 
             int num_u=bit_num_bin(cnds, 9);
             if(num_u>size) continue;
-            if(num_u<size) {
-                printf("mat group base: %i %i\n", num_u, size);
-                return SCAN_ERROR;
-            }
+            if(num_u<size) return SCAN_ERROR;
 
             *sub_pos=0;
             for(int i=0; i<9; i++) {

@@ -80,7 +80,7 @@ void print_mat(matrix *mat) {
 
 // print lattice update
 void print_update(matrix *mat, int n, char *scan) {
-    if(!mat->verbose) return;
+    if(mat->verbose<PRINT_INFO) return;
     int r=n/9,
         c=n-9*r,
         d=lat_num(mat->lat+n);
@@ -93,7 +93,7 @@ void print_update(matrix *mat, int n, char *scan) {
 
 // print cross analysis
 void print_cross(matrix *mat, int cross, int s0, int s1, int d) {
-    if(!mat->verbose) return;
+    if(mat->verbose<PRINT_INFO) return;
 
     char *sub0, *sub1;
     switch(cross) {
@@ -117,7 +117,7 @@ void print_cross(matrix *mat, int cross, int s0, int s1, int d) {
 static char *names[]={"row", "col", "blk", "num"};
 
 void print_group(matrix *mat, int b, barr_t pos0, barr_t pos1, int t0, int t1) {
-    if(!mat->verbose) return;
+    if(mat->verbose<PRINT_INFO) return;
 
     char *nameb, *name0, *name1=names[t1];
     if(t1==MARK_NUM) { // group in number-sub plane
@@ -139,6 +139,15 @@ void print_group(matrix *mat, int b, barr_t pos0, barr_t pos1, int t0, int t1) {
     }
     printf("\n");
 }
+
+// print for debug
+// void print_group_debug(matrix *mat, cand_t *sub, cand_t *trans) {
+//     if(mat->verbose<PRINT_DEBUG) return;
+//     printf("mat group debug\n");
+//     print_cnds_bin(sub);
+//     printf("\n");
+//     print_cnds_bin(trans);
+// }
 
 // print finished matrix
 void print_result(matrix *mat) {

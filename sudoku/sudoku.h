@@ -43,6 +43,11 @@ int nsol;  // number of solution
 int ntry;  // number of try
 
 // macros
+// print level
+#define PRINT_NONE 0
+#define PRINT_DEBUG 1
+#define PRINT_INFO  2
+
 // for block
 #define NOBLK(r, c) ((c/3)+3*(r/3))  // id of block
 #define NIBLK(r, c) ((c%3)+3*(r%3))  // id in block
