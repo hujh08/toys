@@ -1,0 +1,347 @@
+input: input.txt
+
+unset lattices: 57
+initial state:
+        x x x   x x x   x x 5
+        x 7 9   5 x x   4 x 8
+        4 x x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 x   x 6 8   x x x
+        x 3 x   x x 7   x x x
+
+        x x 6   x x 9   x 5 x
+        x x x   x x x   1 6 x
+        x x x   x 8 x   x x x
+
+scan lats found: lat (6, 3), num 1
+
+        x x x   x x x   x x 5
+        x 7 9   5 x x   4 x 8
+        4 x x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 x   x 6 8   x x x
+        x 3 1   x x 7   x x x
+
+        x x 6   x x 9   x 5 x
+        x x x   x x x   1 6 x
+        x x x   x 8 x   x x x
+
+scan lats found: lat (5, 3), num 7
+
+        x x x   x x x   x x 5
+        x 7 9   5 x x   4 x 8
+        4 x x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   x x x
+        x 3 1   x x 7   x x x
+
+        x x 6   x x 9   x 5 x
+        x x x   x x x   1 6 x
+        x x x   x 8 x   x x x
+
+scan rows found: lat (3, 2), num 5
+
+        x x x   x x x   x x 5
+        x 7 9   5 x x   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   x x x
+        x 3 1   x x 7   x x x
+
+        x x 6   x x 9   x 5 x
+        x x x   x x x   1 6 x
+        x x x   x 8 x   x x x
+
+scan rows found: lat (5, 7), num 5
+
+        x x x   x x x   x x 5
+        x 7 9   5 x x   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x x 7   x x x
+
+        x x 6   x x 9   x 5 x
+        x x x   x x x   1 6 x
+        x x x   x 8 x   x x x
+
+scan rows found: lat (6, 5), num 5
+
+        x x x   x x x   x x 5
+        x 7 9   5 x x   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x x x
+
+        x x 6   x x 9   x 5 x
+        x x x   x x x   1 6 x
+        x x x   x 8 x   x x x
+
+scan cols found: lat (1, 2), num 6
+
+        x 6 x   x x x   x x 5
+        x 7 9   5 x x   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x x x
+
+        x x 6   x x 9   x 5 x
+        x x x   x x x   1 6 x
+        x x x   x 8 x   x x x
+
+scan rows found: lat (2, 6), num 6
+
+        x 6 x   x x x   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x x x
+
+        x x 6   x x 9   x 5 x
+        x x x   x x x   1 6 x
+        x x x   x 8 x   x x x
+
+scan rows found: lat (9, 4), num 6
+
+        x 6 x   x x x   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x x x
+
+        x x 6   x x 9   x 5 x
+        x x x   x x x   1 6 x
+        x x x   6 8 x   x x x
+
+scan cols found: lat (6, 8), num 8
+
+        x 6 x   x x x   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x 8 x
+
+        x x 6   x x 9   x 5 x
+        x x x   x x x   1 6 x
+        x x x   6 8 x   x x x
+
+scan rows found: lat (6, 9), num 4
+
+        x 6 x   x x x   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x 8 4
+
+        x x 6   x x 9   x 5 x
+        x x x   x x x   1 6 x
+        x x x   6 8 x   x x x
+
+scan rows found: lat (7, 5), num 4
+
+        x 6 x   x x x   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x 8 4
+
+        x x 6   x 4 9   x 5 x
+        x x x   x x x   1 6 x
+        x x x   6 8 x   x x x
+
+scan rows found: lat (1, 6), num 4
+
+        x 6 x   x x 4   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x 8 4
+
+        x x 6   x 4 9   x 5 x
+        x x x   x x x   1 6 x
+        x x x   6 8 x   x x x
+
+scan rows found: lat (8, 3), num 4
+
+        x 6 x   x x 4   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x 8 4
+
+        x x 6   x 4 9   x 5 x
+        x x 4   x x x   1 6 x
+        x x x   6 8 x   x x x
+
+scan rows found: lat (8, 1), num 8
+
+        x 6 x   x x 4   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x 8 4
+
+        x x 6   x 4 9   x 5 x
+        8 x 4   x x x   1 6 x
+        x x x   6 8 x   x x x
+
+scan rows found: lat (7, 7), num 8
+
+        x 6 x   x x 4   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x 8 4
+
+        x x 6   x 4 9   8 5 x
+        8 x 4   x x x   1 6 x
+        x x x   6 8 x   x x x
+
+scan rows found: lat (8, 6), num 5
+
+        x 6 x   x x 4   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x 8 4
+
+        x x 6   x 4 9   8 5 x
+        8 x 4   x x 5   1 6 x
+        x x x   6 8 x   x x x
+
+scan rows found: lat (9, 8), num 4
+
+        x 6 x   x x 4   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x 8 4
+
+        x x 6   x 4 9   8 5 x
+        8 x 4   x x 5   1 6 x
+        x x x   6 8 x   x 4 x
+
+scan rows found: lat (9, 1), num 5
+
+        x 6 x   x x 4   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x 8 4
+
+        x x 6   x 4 9   8 5 x
+        8 x 4   x x 5   1 6 x
+        5 x x   6 8 x   x 4 x
+
+scan rows found: lat (9, 9), num 7
+
+        x 6 x   x x 4   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x 8 4
+
+        x x 6   x 4 9   8 5 x
+        8 x 4   x x 5   1 6 x
+        5 x x   6 8 x   x 4 7
+
+scan cols found: lat (7, 1), num 7
+
+        x 6 x   x x 4   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x 8 4
+
+        7 x 6   x 4 9   8 5 x
+        8 x 4   x x 5   1 6 x
+        5 x x   6 8 x   x 4 7
+
+scan blks found: lat (9, 3), num 3
+
+        x 6 x   x x 4   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x 8 4
+
+        7 x 6   x 4 9   8 5 x
+        8 x 4   x x 5   1 6 x
+        5 x 3   6 8 x   x 4 7
+
+cross: blk 3, col 8, num 1
+cross: blk 9, col 9, num 3
+cross: blk 6, col 8, num 3
+group: blk 2, lats 127, nums 789
+
+after fill without try:
+    matrix after fill without try
+    unset lattices: 36
+        x 6 x   x x 4   x x 5
+        x 7 9   5 x 6   4 x 8
+        4 5 x   x 1 x   x x x
+
+        x 8 5   4 x x   7 x x
+        2 4 7   x 6 8   5 x x
+        x 3 1   x 5 7   x 8 4
+
+        7 x 6   x 4 9   8 5 x
+        8 x 4   x x 5   1 6 x
+        5 x 3   6 8 x   x 4 7
+
+solution 1:
+total try: 5
+level of try: 4
+        1 6 2   8 9 4   3 7 5
+        3 7 9   5 2 6   4 1 8
+        4 5 8   7 1 3   2 9 6
+
+        6 8 5   4 3 1   7 2 9
+        2 4 7   9 6 8   5 3 1
+        9 3 1   2 5 7   6 8 4
+
+        7 2 6   1 4 9   8 5 3
+        8 9 4   3 7 5   1 6 2
+        5 1 3   6 8 2   9 4 7
+
+total try: 9
+1 solutions found
