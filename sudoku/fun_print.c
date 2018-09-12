@@ -140,6 +140,52 @@ void print_group(matrix *mat, int b, barr_t pos0, barr_t pos1, int t0, int t1) {
     printf("\n");
 }
 
+void print_chain(matrix *mat, rels_t rels, int *result) {
+    if(mat->verbose<PRINT_INFO) return;
+
+    int ai=result[0],
+        bi=result[1],
+        mark=result[2];
+    
+    printf("found chain: %i %i", ai, bi);
+    if(mark&REL_STRONG) printf(" strong");
+    if(mark&REL_WEAK) printf(" weak");
+    printf("\n");
+    if(ai==bi) {
+        event_t ev=rels_event_at(rels, ai);
+        int nlat=ev.lat,
+            r=nlat/9,
+            c=nlat%9,
+            d=ev.num;
+        printf("    event: lat (%i, %i), num %i,", r+1, c+1, d);
+        if(mark==REL_STRONG) printf(" true\n");
+        else printf(" false\n");
+
+        // print
+        printf("    ");
+        print_chain_between(rels, ai, bi, mark);
+        if(mark==REL_STRONG) {
+            printf("    update: lat (%i, %i), num %i\n", r+1, c+1, d);
+        } else {
+            printf("    delete: lat (%i, %i), num %i\n", r+1, c+1, d);
+        }
+    } else {
+        printf("    ");
+        print_chain_between(rels, ai, bi, REL_STRONG);
+        printf("    ");
+        print_chain_between(rels, ai, bi, REL_WEAK);
+
+        event_t *evts=rels.events;
+        printf("    del: ");
+        for(int i=0; i<rels.ne; i++) {
+            if(evts[i].mark!=3) continue;
+            print_event_at(rels, i);
+            printf(" ");
+        }
+        printf("\n");
+    }
+}
+
 // print for debug
 // void print_group_debug(matrix *mat, cand_t *sub, cand_t *trans) {
 //     if(mat->verbose<PRINT_DEBUG) return;

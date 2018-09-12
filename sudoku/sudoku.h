@@ -1,6 +1,7 @@
 // structures for sudoku
 
 #include "bitarr.h"
+#include "mat_chain.h"
 
 // structure for candidate, for lattice or number in row/col/block
 typedef struct
@@ -91,6 +92,7 @@ extern void print_mat(matrix *);
 extern void print_update(matrix *, int , char *);
 extern void print_cross(matrix *, int , int , int , int );
 extern void print_group(matrix *, int , barr_t , barr_t , int , int );
+extern void print_chain(matrix *, rels_t , int *);
 extern void print_result(matrix *);
 
 // function for arguments
@@ -103,6 +105,7 @@ extern int lat_isset(lattice *);
 extern int lat_isnum(lattice *, int );
 extern int lat_iscand(lattice *, int );
 extern int lat_1stcand(lattice *);
+extern barr_t lat_bins(lattice *);
 extern int lat_num(lattice *);
 extern int lat_cand_num(lattice *);
 extern void lat_del_num(lattice *, int );
@@ -145,3 +148,4 @@ extern int gen_group(cand_t *, cand_t *, int ,
 extern int mat_group_sub(matrix *);
 extern int mat_group_num(matrix *);
 extern int mat_cross(matrix *);
+extern int mat_chain(matrix *);

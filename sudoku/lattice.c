@@ -40,6 +40,11 @@ int lat_num(lattice *lat) {
 	return lat->number;
 }
 
+// return cand of lat
+barr_t lat_bins(lattice *lat) {
+	return cand_bins(&(lat->cnds));
+}
+
 // number of candidate
 int lat_cand_num(lattice *lat) {
 	return cand_num(&(lat->cnds));

@@ -57,6 +57,10 @@ int mat_fill_notry(matrix *mat) {
                     which is done in col/row-blk plane and group size=1
         */
 
+        found=mat_chain(mat);
+        if(found==SCAN_ERROR) return found;
+        if(found==SCAN_SUCC) continue;
+
         if(found==SCAN_NONE) return found;
     }
 
