@@ -198,6 +198,8 @@ void print_chain(matrix *mat, rels_t rels, int *result) {
 // print finished matrix
 void print_result(matrix *mat) {
     printf("solution %i:\n", ++nsol);
+    printf("initial unset: %i\n", unset);
+    printf("total steps: %i\n", mat->nstep);
     printf("total try: %i\n", ntry);
     printf("level of try: %i\n", mat->ntry);
     print_mat(mat);

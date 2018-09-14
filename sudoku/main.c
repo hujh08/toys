@@ -15,6 +15,7 @@ int main(int argc, char **argv)
 
     matrix mat;
     mat.ntry=0;
+    mat.nstep=0;
 
     parse_args(argc, argv, &mat);
 
@@ -22,7 +23,8 @@ int main(int argc, char **argv)
 
     readtxt(filename, &mat);
 
-    printf("unset lattices: %i\n", mat.unset);
+    unset=mat.unset;
+    printf("unset lattices: %i\n", unset);
     printf("initial state:\n");
     print_mat(&mat);
     printf("\n");

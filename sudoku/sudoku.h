@@ -30,8 +30,9 @@ typedef struct
 
 typedef struct
 {
-	int ntry;   // hight of try
-	int unset;  // number of unset
+	int ntry;    // hight of try
+	int nstep;   // number of step
+	int unset;   // number of unset
 
 	int verbose;  // whether print the step
 
@@ -43,6 +44,7 @@ typedef struct
 int nsol;  // number of solution
 int ntry;  // number of try
 int lchn;  // length of longest chain
+int unset; // initial unset
 
 // macros
 // print level

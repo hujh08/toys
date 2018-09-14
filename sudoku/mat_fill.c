@@ -11,6 +11,7 @@ int mat_fill_notry(matrix *mat) {
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) {
             mat_update(mat, n, d);
+            (mat->nstep)++;
             print_update(mat, n, "rows");
             continue;
         }
@@ -19,6 +20,7 @@ int mat_fill_notry(matrix *mat) {
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) {
             mat_update(mat, n, d);
+            (mat->nstep)++;
             print_update(mat, n, "cols");
             continue;
         }
@@ -27,6 +29,7 @@ int mat_fill_notry(matrix *mat) {
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) {
             mat_update(mat, n, d);
+            (mat->nstep)++;
             print_update(mat, n, "blks");
             continue;
         }
@@ -35,6 +38,7 @@ int mat_fill_notry(matrix *mat) {
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) {
             mat_update(mat, n, d);
+            (mat->nstep)++;
             print_update(mat, n, "lats");
             continue;
         }
@@ -42,15 +46,15 @@ int mat_fill_notry(matrix *mat) {
         // strategies to reduce candidates
         found=mat_cross(mat);
         if(found==SCAN_ERROR) return found;
-        if(found==SCAN_SUCC) continue;
+        if(found==SCAN_SUCC) {(mat->nstep)++; continue;}
 
         found=mat_group_sub(mat);
         if(found==SCAN_ERROR) return found;
-        if(found==SCAN_SUCC) continue;
+        if(found==SCAN_SUCC) {(mat->nstep)++; continue;}
 
         found=mat_group_num(mat);
         if(found==SCAN_ERROR) return found;
-        if(found==SCAN_SUCC) continue;
+        if(found==SCAN_SUCC) {(mat->nstep)++; continue;}
         /*
             comment about group_num:
                 mat_cross can be seen as a special mat_group_num
@@ -59,7 +63,7 @@ int mat_fill_notry(matrix *mat) {
 
         found=mat_chain(mat);
         if(found==SCAN_ERROR) return found;
-        if(found==SCAN_SUCC) continue;
+        if(found==SCAN_SUCC) {(mat->nstep)++; continue;}
 
         if(found==SCAN_NONE) return found;
     }
