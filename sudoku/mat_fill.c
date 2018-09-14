@@ -7,14 +7,6 @@ int mat_fill_notry(matrix *mat) {
     int n, d, found;
 
     while(mat->unset) {
-        found=scan_lats(mat, &n, &d);
-        if(found==SCAN_ERROR) return found;
-        if(found==SCAN_SUCC) {
-            mat_update(mat, n, d);
-            print_update(mat, n, "lats");
-            continue;
-        }
-
         found=scan_rows(mat, &n, &d);
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) {
@@ -36,6 +28,14 @@ int mat_fill_notry(matrix *mat) {
         if(found==SCAN_SUCC) {
             mat_update(mat, n, d);
             print_update(mat, n, "blks");
+            continue;
+        }
+        
+        found=scan_lats(mat, &n, &d);
+        if(found==SCAN_ERROR) return found;
+        if(found==SCAN_SUCC) {
+            mat_update(mat, n, d);
+            print_update(mat, n, "lats");
             continue;
         }
 
