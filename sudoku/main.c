@@ -29,6 +29,7 @@ int main(int argc, char **argv)
 
     nsol=0;
     ntry=0;
+    lchn=-1;
 
     int found=mat_fill_notry(&mat);
 
@@ -51,6 +52,8 @@ int main(int argc, char **argv)
     if(mat.unset) mat_fill_try(&mat);
 
     printf("total try: %i\n", ntry);
+    printf("longest chain: %i\n", lchn);
+    printf("\n");
 
     if(nsol==0) printf("no solution found\n");
     else printf("%i solutions found\n", nsol);

@@ -40,7 +40,7 @@ void print_event_at(rels_t rels, int n) {
     printf("[(%i, %i), %i]", r+1, c+1, d);
 }
 
-void print_chain_between(rels_t rels, int e0, int e1, int rmark) {
+void print_chain_between(rels_t rels, int e0, int e1, int rmark, char *indent) {
     // int nst=NCHAIN(REL_STRONG),
         // nwk=NCHAIN(REL_WEAK);
     char *rel_seps[2];
@@ -58,15 +58,21 @@ void print_chain_between(rels_t rels, int e0, int e1, int rmark) {
     // printf("sep now: %s\n", rel_seps[nsep]);
 
     // printf("chain:\n");
-    int *arr=chain.arr;
+    int *arr=chain.arr,
+        ne_line=4;    // number of events printed in one line
+
+    printf("%s  ", indent);
     print_event_at(rels, e0);
     for(int i=0; i<len; i++) {
+        if((i+1)%ne_line==0) printf("\n%s", indent);   // count in e0
         printf("%s", rel_seps[nsep]);
         nsep=1-nsep;
         print_event_at(rels, arr[i]);
     }
+    if((len+1)%ne_line==0) printf("\n%s", indent);   // count in e0
     printf("%s", rel_seps[nsep]);
     print_event_at(rels, e1);
+
     printf("\n");
 }
 

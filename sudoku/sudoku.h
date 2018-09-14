@@ -42,6 +42,7 @@ typedef struct
 
 int nsol;  // number of solution
 int ntry;  // number of try
+int lchn;  // length of longest chain
 
 // macros
 // print level

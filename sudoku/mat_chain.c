@@ -103,24 +103,26 @@ int rels_update_midr(rels_t *rels, int a, int b, int rmark0, int *buff) {
             // printf("events: %i %i change\n", j, i);
             change=REL_SCAN_CHANGE;
             if(ai==bi) {
-                result[0]=result[1]=ai;
+                result[0]=ai;
                 return REL_SCAN_FOUND;
             }
-            if(rels_rel_between(*rels, ai, bi)!=REL_BOTH) continue;
+            // find event having weak relations with two strong-connected events
+            //      is equal to before
+            // if(rels_rel_between(*rels, ai, bi)!=REL_BOTH) continue;
 
-            event_t eva=rels_event_at(*rels, ai),
-                    evb=rels_event_at(*rels, bi);
+            // event_t eva=rels_event_at(*rels, ai),
+            //         evb=rels_event_at(*rels, bi);
 
-            int numa=eva.num, numb=evb.num;
+            // int numa=eva.num, numb=evb.num;
 
-            if(numa!=numb) continue;
+            // if(numa!=numb) continue;
 
-            int nu=rels_events_weak_union_between(rels, ai, bi);
-            if(nu==0) continue;
+            // int nu=rels_events_weak_union_between(rels, ai, bi);
+            // if(nu==0) continue;
 
-            result[0]=ai;
-            result[1]=bi;
-            return REL_SCAN_FOUND;
+            // result[0]=ai;
+            // result[1]=bi;
+            // return REL_SCAN_FOUND;
         }
     }
 
@@ -147,9 +149,7 @@ int rels_update_scan(rels_t *rels, int *result) {
                 if(chi==REL_SCAN_CHANGE) change=chi; 
                 else if(chi==REL_SCAN_FOUND) {
                     result[0]=buff[0];
-                    result[1]=buff[1];
-
-                    if(buff[0]==buff[1]) result[2]=REL_WEAK;
+                    result[1]=REL_WEAK;
 
                     free(buff);
                     return REL_SCAN_FOUND;
@@ -160,8 +160,7 @@ int rels_update_scan(rels_t *rels, int *result) {
                 if(chi==REL_SCAN_CHANGE) change=chi;
                 else if(chi==REL_SCAN_FOUND) {
                     result[0]=buff[0];
-                    result[1]=buff[1];
-                    if(buff[0]==buff[1]) result[2]=REL_STRONG;
+                    result[1]=REL_STRONG;
 
                     free(buff);
                     return REL_SCAN_FOUND;
@@ -257,48 +256,36 @@ int mat_chain(matrix *mat) {
             break;
         } else if(found==REL_SCAN_FOUND) {
             int ai=result[0],
-                bi=result[1],
-                mark=result[2];
+                mark=result[1];
             // printf("found chain: %i %i", ai, bi);
             // if(mark&REL_STRONG) printf(" strong");
             // if(mark&REL_WEAK) printf(" weak");
             // printf("\n");
-            if(ai==bi) {
-                if(mark==REL_BOTH) return SCAN_ERROR;
+            
+            event_t ev=rels_event_at(rels, ai);
+            int nlat=ev.lat,
+                // r=nlat/9,
+                // c=nlat%9,
+                d=ev.num;
+            // printf("    event: lat (%i, %i), num %i,", r+1, c+1, d);
+            // if(mark==REL_STRONG) printf(" true\n");
+            // else printf(" false\n");
 
-                event_t ev=rels_event_at(rels, ai);
-                int nlat=ev.lat,
-                    // r=nlat/9,
-                    // c=nlat%9,
-                    d=ev.num;
-                // printf("    event: lat (%i, %i), num %i,", r+1, c+1, d);
-                // if(mark==REL_STRONG) printf(" true\n");
-                // else printf(" false\n");
+            // print
+            // printf("    ");
+            // print_chain_between(rels, ai, bi, mark);
 
-                // print
-                // printf("    ");
-                // print_chain_between(rels, ai, bi, mark);
+            int len=rels_lenchain_between(rels, ai, ai, mark);
+            if(len>lchn) lchn=len;
 
-                if(mark==REL_STRONG) {
-                    // printf("    will update\n");
-                    mat_update(mat, nlat, d);
-                    // print_update(mat, nlat, "lats");
-                    print_chain(mat, rels, result);
-                } else {
-                    // printf("    del lat (%i, %i), num %i\n", r+1, c+1, d);
-                    mat_del_latnum(mat, nlat, d);
-                    print_chain(mat, rels, result);
-                }
+            if(mark==REL_STRONG) {
+                // printf("    will update\n");
+                mat_update(mat, nlat, d);
+                // print_update(mat, nlat, "lats");
+                print_chain(mat, rels, result);
             } else {
-                event_t *evts=rels.events;
-                for(int i=0; i<ncnd; i++) {
-                    if(evts[i].mark!=3) continue;
-
-                    int l=evts[i].lat,
-                        d=evts[i].num;
-
-                    mat_del_latnum(mat, l, d);
-                }
+                // printf("    del lat (%i, %i), num %i\n", r+1, c+1, d);
+                mat_del_latnum(mat, nlat, d);
                 print_chain(mat, rels, result);
             }
             rels_free(&rels);

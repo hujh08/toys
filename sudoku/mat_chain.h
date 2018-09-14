@@ -48,7 +48,7 @@ typedef struct
 extern void print_rels(rels_t );
 extern void print_rels_count(rels_t );
 extern void print_event_at(rels_t , int );
-extern void print_chain_between(rels_t , int , int , int );
+extern void print_chain_between(rels_t , int , int , int , char *);
 // extern void print_bothchains_between(rels_t , int , int );
 
 // functions for chain
