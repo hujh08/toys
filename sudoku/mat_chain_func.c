@@ -178,7 +178,8 @@ int rel_lenchain(rel_t rel, int mark) {
 // function for rels
 void rels_init(rels_t *rels, int n) {
     rels->ne=n;
-    // rels->len=0;
+    rels->len=0;
+    
     rels->map=MALLOC(9*81, int);
     rels->events=MALLOC(n, event_t);
     rels->rels=MALLOC(n*n, rel_t);

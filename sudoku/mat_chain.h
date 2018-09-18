@@ -21,7 +21,7 @@ typedef struct
 typedef struct
 {
 	int ne,    // number of events
-		// len,   // chains shorter than len all found
+		len,   // chains shorter than len all found
 		*map;
 	event_t *events;
 	rel_t *rels;
