@@ -178,6 +178,7 @@ int rel_lenchain(rel_t rel, int mark) {
 // function for rels
 void rels_init(rels_t *rels, int n) {
     rels->ne=n;
+    // rels->len=0;
     rels->map=MALLOC(9*81, int);
     rels->events=MALLOC(n, event_t);
     rels->rels=MALLOC(n*n, rel_t);
@@ -248,8 +249,11 @@ int rels_link_chains(rels_t *rels, int *events, int n, int rmark) {
     // printf("got it: unset before\n");
     int len=n-2;
     // printf("len: %i\n", len);
-    for(int i=0; i<n-1; i++)
-        len+=rels_lenchain_between(*rels, events[i], events[i+1], rmark);
+    int rm=rmark;
+    for(int i=0; i<n-1; i++) {
+        len+=rels_lenchain_between(*rels, events[i], events[i+1], rm);
+        rm=REL_REVERSE(rm);
+    }
 
     // printf("len: %i\n", len);
     int *chain=MALLOC(len, int);
@@ -265,17 +269,19 @@ int rels_link_chains(rels_t *rels, int *events, int n, int rmark) {
 
     start=events[ei];
     int pos=0;
+    rm=rmark;
     for(; ei!=estop; ei+=shift) {
         // printf("ei: %i\n", ei);
         // printf("chain: %i %i\n", events[ei], events[ei+shift]);
         // printf("pos: %i\n", pos);
-        rels_copy_chainbetween_to(*rels, events[ei], events[ei+shift], rmark, 
+        rels_copy_chainbetween_to(*rels, events[ei], events[ei+shift], rm, 
                                         chain, &pos);
         // printf("pos: %i\n", pos);
         // printf("ei: %i\n", ei);
         chain[pos++]=events[ei+shift];
+        rm=REL_REVERSE(rm);
     }
-    rels_copy_chainbetween_to(*rels, events[ei], events[ei+shift], rmark,
+    rels_copy_chainbetween_to(*rels, events[ei], events[ei+shift], rm,
                                         chain, &pos);
     end=events[ei+shift];
 

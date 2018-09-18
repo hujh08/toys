@@ -21,6 +21,7 @@ typedef struct
 typedef struct
 {
 	int ne,    // number of events
+		// len,   // chains shorter than len all found
 		*map;
 	event_t *events;
 	rel_t *rels;
@@ -31,6 +32,8 @@ typedef struct
 #define REL_STRONG 2
 #define REL_BOTH 3   // both weak and strong
 #define REL_MARK 3   // mark the relation bits
+
+#define REL_REVERSE(mark) ((~(mark))&REL_MARK)
 #define NCHAIN(rel) ((rel)-1)  // id in chains for weak/strong relation
 
 #define REL_SCAN_NONE 0

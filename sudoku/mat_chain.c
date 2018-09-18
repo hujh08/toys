@@ -71,17 +71,21 @@ int rels_update_midr(rels_t *rels, int a, int b, int rmark0, int *buff) {
     int ne=rels->ne;
     // printf("ne: %i\n", ne);
 
-    int rmark=(~rmark0)&REL_MARK;
+    int rmark=REL_REVERSE(rmark0);
 
     int *buffa=buff,
         *buffb=buff+ne,
         na=0, nb=0;
     // find two sides relation
     for(int i=0; i<ne; i++) {
-        if(rels_isrel_between(*rels, i, a, rmark)) buffa[na++]=i;
+        if(!rels_isrel_between(*rels, i, a, rmark)) continue;
+        // if(rels_lenchain_between(*rels, i, a, rmark)!=0) continue;
+        buffa[na++]=i;
     }
     for(int i=0; i<ne; i++) {
-        if(rels_isrel_between(*rels, b, i, rmark)) buffb[nb++]=i;
+        if(!rels_isrel_between(*rels, b, i, rmark)) continue;
+        // if(rels_lenchain_between(*rels, b, i, rmark)!=0) continue;
+        buffb[nb++]=i;
     }
 
     // printf("nab: %i %i\n", na, nb);
@@ -99,6 +103,7 @@ int rels_update_midr(rels_t *rels, int a, int b, int rmark0, int *buff) {
             events[3]=bi=buffb[i];
             int chi=rels_link_chains(rels, events, 4, rmark);
             if(chi==REL_SCAN_NONE) continue;
+            // printf("add chain: %i %i %i\n", ai, bi, rmark);
             // if(change==REL_SCAN_CHANGE)
             // printf("events: %i %i change\n", j, i);
             change=REL_SCAN_CHANGE;
@@ -134,17 +139,21 @@ int rels_update_scan(rels_t *rels, int *result) {
     // printf("rels_update_scan\n");
     int ne=rels->ne;
 
+    // int len0=rels->len;
+
     int change=0, //ai, bi,
         *buff=MALLOC(2*ne, int);
     for(int j=0; j<ne-1; j++) {
         for(int i=j+1; i<ne; i++) {
             if(rel_norel(rels->rels[i+j*ne])) continue;
+            // int lens=rels_lenchain_between(*rels, j, i, REL_STRONG),
+                // lenw=rels_lenchain_between(*rels, j, i, REL_WEAK);
 
             // printf("relation between %i %i: %i\n", j, i, 
                         // rel_rel(rels->rels[i+j*ne]));
 
             int chi;
-            if(rel_isstrong(rels->rels[i+j*ne])) {
+            if(rel_isstrong(rels->rels[i+j*ne])) { //&& lens==len0) {
                 chi=rels_update_midr(rels, j, i, REL_STRONG, buff);
                 if(chi==REL_SCAN_CHANGE) change=chi; 
                 else if(chi==REL_SCAN_FOUND) {
@@ -155,7 +164,7 @@ int rels_update_scan(rels_t *rels, int *result) {
                     return REL_SCAN_FOUND;
                 }
             }
-            if(rel_isweak(rels->rels[i+j*ne]))  {
+            if(rel_isweak(rels->rels[i+j*ne])) { // && lenw==len0)  {
                 chi=rels_update_midr(rels, j, i, REL_WEAK, buff);
                 if(chi==REL_SCAN_CHANGE) change=chi;
                 else if(chi==REL_SCAN_FOUND) {
@@ -242,7 +251,9 @@ int mat_chain(matrix *mat) {
 
     int found=0, result[3];
     for(int i=0; i<ncnd; i++) { // longest chain is with length=nevents
+    	// printf("chains shorter than %i all found\n", rels.len);
         found=rels_update_scan(&rels, result);
+        // rels.len+=2;
 
         // if(i%100==0) {
         //     printf("after %i trips scan\n", i+1);
@@ -251,6 +262,7 @@ int mat_chain(matrix *mat) {
         // }
 
         if(found==REL_SCAN_NONE) {
+        	printf("total events: %i\n", rels.ne);
             printf("maxium chain scan: %i\n", i+1);
             printf("chain can't change any more\n");
             break;
