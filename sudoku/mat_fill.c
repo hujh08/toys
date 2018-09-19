@@ -7,6 +7,7 @@ int mat_fill_notry(matrix *mat) {
     int n, d, found;
 
     while(mat->unset) {
+        // print_lat(mat->lat);
         found=scan_rows(mat, &n, &d);
         if(found==SCAN_ERROR) return found;
         if(found==SCAN_SUCC) {

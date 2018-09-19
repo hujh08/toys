@@ -109,7 +109,11 @@ int rows_cross(matrix *mat) {
                     }
                 }
 
-                if(changed) return SCAN_SUCC;
+                if(changed) {
+                    int b=bc+3*br;
+                    print_cross(mat, CROSS_ROW_BLK, r, b, d+1);
+                    return SCAN_SUCC;
+                }
             }
         }
     }
@@ -154,7 +158,11 @@ int cols_cross(matrix *mat) {
                     }
                 }
 
-                if(changed) return SCAN_SUCC;
+                if(changed) {
+                    int b=bc+3*br;
+                    print_cross(mat, CROSS_COL_BLK, c, b, d+1);
+                    return SCAN_SUCC;
+                }
             }
         }
     }
