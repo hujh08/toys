@@ -151,6 +151,8 @@ void print_chain(matrix *mat, rels_t rels, int *result) {
     printf("found chain: ");
     if(mark&REL_STRONG) printf("strong\n");
     else printf("weak\n");
+    printf("    chain: %i events\n", len);
+    print_chain_between(rels, ai, ai, mark, "        ");
     
     event_t ev=rels_event_at(rels, ai);
     int nlat=ev.lat,
@@ -162,8 +164,6 @@ void print_chain(matrix *mat, rels_t rels, int *result) {
     else printf(" false\n");
 
     // print
-    printf("    chain: %i events\n", len);
-    print_chain_between(rels, ai, ai, mark, "        ");
     if(mark==REL_STRONG) {
         printf("    update: lat (%i, %i), num %i\n", r+1, c+1, d);
     } else {
