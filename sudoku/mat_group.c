@@ -53,7 +53,7 @@ int gen_group(cand_t *sub, cand_t *trans, int maxs,
     int mins=9;
     
     barr_t mask_grp=0,        // mask grouped lattice
-           mask_cnt=(1<<9)-1;
+           mask_cnt=(1<<9)-1;  // mask lattice with candidate number>group size
 
     for(int i=0; i<9; i++) {
         if(cand_isset(sub+i)) continue;
@@ -85,7 +85,7 @@ int gen_group(cand_t *sub, cand_t *trans, int maxs,
             if(num_u>size) continue;
             if(num_u<size) return SCAN_ERROR;
 
-            *sub_pos=0;
+            int change=0;
             for(int i=0; i<9; i++) {
                 if(cand_isset(trans+i)) continue;
 
@@ -95,11 +95,13 @@ int gen_group(cand_t *sub, cand_t *trans, int maxs,
                 barr_t arr_m=cand_bins(trans+i)&(~arr);
                 if(!arr_m) continue;
 
-                *sub_pos|=1<<i;
+                change=1;
+                break;
             }
 
-            if(*sub_pos) {
+            if(change) {
                 *sub_grp=arr;
+                *sub_pos=cnds;
                 return SCAN_SUCC;
             }
 
